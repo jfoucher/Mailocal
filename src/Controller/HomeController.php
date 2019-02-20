@@ -14,8 +14,17 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $emails = $this->getDoctrine()->getRepository(Email::class)->findAll();
+        $emails = array_map(function($email) {
+            /**
+             * @var Email $email
+             */
+            $email->firstLine = explode("\n", $email->getText())[0];
+            return $email;
+        }, $emails);
+
         return $this->render('home/index.html.twig', [
-            'emails' => $this->getDoctrine()->getRepository(Email::class)->findAll(),
+            'emails' => $emails,
         ]);
     }
 
