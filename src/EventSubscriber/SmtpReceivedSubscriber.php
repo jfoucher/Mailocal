@@ -28,7 +28,6 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        // return the subscribed events, their methods and priorities
         return [
             SessionInterface::EVENT_SMTP_RECEIVED => [
                 ['processSmtpConnection', 10],
@@ -45,7 +44,6 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $email->setHeaders(explode("\n\n", $event->message->data)[0]);
         $email->setHtml($message->getHtmlBody());
         $email->setText($message->getTextBody());
-        $this->logger->info($message->getTextBody());
         $email->setSubject(mb_decode_mimeheader($message->getSubject()));
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());

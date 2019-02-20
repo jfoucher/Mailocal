@@ -47,6 +47,11 @@ class Email
     private $created_at;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $html;
@@ -182,6 +187,22 @@ class Email
     public function setFromName($fromName)
     {
         $this->fromName = $fromName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param mixed $deletedAt
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 
 }

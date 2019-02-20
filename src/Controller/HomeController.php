@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Email;
+use App\Repository\EmailRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,11 +12,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{email}", name="home")
      */
-    public function index()
+    public function index(Request $request, $email = null)
     {
-        $emails = $this->getDoctrine()->getRepository(Email::class)->findAll();
+        /**
+         * @var EmailRepository $repository
+         */
+        $repository = $this->getDoctrine()->getRepository(Email::class);
+        $criteria = [];
+        if ($email) {
+            $criteria['to'] = $email;
+        }
+        $s = $request->query->get('s');
+        if ($s) {
+            $criteria[''];
+        }
+        $emails = $repository->allOrderedDateDesc($criteria);
         $emails = array_map(function($email) {
             /**
              * @var Email $email
@@ -25,6 +39,8 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'emails' => $emails,
+            'total' => $repository->count(['deletedAt' => null]),
+            'recipients' => $repository->getRecipients(),
         ]);
     }
 

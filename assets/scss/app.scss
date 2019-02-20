@@ -1,5 +1,40 @@
 @import '~@fortawesome/fontawesome-free/scss/v4-shims';
 
-h1.blabla{
-    font-size: 1px;
+.mailbox-subject {
+    b {
+        display:block;
+    }
+    .mailbox-firstline {
+        display:block;
+        font-size: 0.8em;
+        color: #aaa;
+    }
+}
+.treeview-menu {
+    li {
+        a {
+            span {
+                max-width: 70%;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.max-80 {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.mailbox-messages {
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+.col-md-8, .col-md-12, .col-md-4, .email-display{
+    transition: all 100ms; //replace 200ms with time of your choice
 }

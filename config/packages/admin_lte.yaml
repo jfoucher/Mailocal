@@ -9,7 +9,7 @@ admin_lte:
         # default image for missing user avatar images
         default_avatar: bundles/adminlte/images/default_avatar.png
         # the color skin
-        skin: skin-blue
+        skin: skin-green
         # if activated, the boxed_layout will be deactivated
         fixed_layout: false
         # boxed layout (true) or full-screen (false)
@@ -17,7 +17,7 @@ admin_lte:
         # initial collapsed state of the sidebar
         collapsed_sidebar: false
         # whether the logo collapses or not
-        mini_sidebar: false
+        mini_sidebar: true
 
     # configurable tabs in the control_sidebar (right screen), see:
     # https://github.com/kevinpapst/AdminLTEBundle/blob/master/Resources/docs/control_sidebar.md

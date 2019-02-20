@@ -5,48 +5,56 @@ require('../scss/app.scss');
 
 (function ($) {
   $(document).ready(() => {
-    console.log('mb', $('.mailbox-messages input[type="checkbox"]'));
-  //Enable iCheck plugin for checkboxes
-  //iCheck for checkbox and radio inputs
-  $('.mailbox-messages input[type="checkbox"]').iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
-  });
+    //Enable iCheck plugin for checkboxes
+    //iCheck for checkbox and radio inputs
+    $('.mailbox-messages input[type="checkbox"]').iCheck({
+      checkboxClass: 'icheckbox_flat-blue',
+      radioClass: 'iradio_flat-blue'
+    });
 
-  //Enable check and uncheck all functionality
-  $(".checkbox-toggle").click(function () {
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-      //Uncheck all checkboxes
-      $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-      $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-    } else {
-      //Check all checkboxes
-      $(".mailbox-messages input[type='checkbox']").iCheck("check");
-      $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-    }
-    $(this).data("clicks", !clicks);
-  });
+    //Enable check and uncheck all functionality
+    $(".checkbox-toggle").click(function () {
+      const clicks = $(this).data('clicks');
+      if (clicks) {
+        //Uncheck all checkboxes
+        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+      } else {
+        //Check all checkboxes
+        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+      }
+      $(this).data("clicks", !clicks);
+    });
 
-  //Handle starring for glyphicon and font awesome
-  $(".mailbox-star").click(function (e) {
-    e.preventDefault();
-    //detect type
-    var $this = $(this).find("a > i");
-    var glyph = $this.hasClass("glyphicon");
-    var fa = $this.hasClass("fa");
+    $('.trash').on('click', (ev) => {
+      const btn = $(ev.currentTarget);
+      $(".mailbox-messages input[type='checkbox']:checked").each((i, item) => {
+        const $item = $(item);
+        $.ajax({
+          url: $item.data('link'),
+          method: 'delete'
+        }).then((res) => {
+          console.log('deleted', res);
+          $item.parents('tr').remove();
+        })
+      })
+    })
 
-    //Switch states
-    if (glyph) {
-      $this.toggleClass("glyphicon-star");
-      $this.toggleClass("glyphicon-star-empty");
-    }
-
-    if (fa) {
-      $this.toggleClass("fa-star");
-      $this.toggleClass("fa-star-o");
-    }
-  });
+    $('body').on('click', '.mailbox-messages table tbody > tr', (ev) => {
+      const tr = $(ev.currentTarget);
+      const html = tr.find('script.html-email');
+      console.log('html', html.html());
+      $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
+      $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
+      $('#email-display-iframe').contents().find('html').html(html.html())
+      $('.mailbox-firstline').hide();
+    })
+      .on('click', '.email-close', (ev) => {
+      $('.email-display').removeClass('col-md-8').css('display', 'none');
+      $('.email-list').addClass('col-md-12').removeClass('col-md-4').find('td > a').removeClass('max-80');
+      $('.mailbox-firstline').show();
+    })
   });
 
 })(jQuery);
