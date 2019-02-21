@@ -21,7 +21,8 @@
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production"
+    "build": "encore production",
+    "start": "encore production | bin/console server:run | php bin/console email:server"
   },
   "dependencies": {}
 }
