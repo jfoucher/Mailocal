@@ -7,6 +7,7 @@
  * Time: 19:52
  */
 namespace App\EventSubscriber;
+use App\Email\InvalidAttachmentException;
 use App\Email\Parser;
 use App\Entity\Email;
 use App\Smtp\AuthFailedEvent;
@@ -14,6 +15,7 @@ use App\Smtp\CustomSession;
 use App\Smtp\MessageReceivedEvent;
 use App\Smtp\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use MS\Email\Parser\Attachment;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -44,12 +46,31 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
     {
         $event->message->delivered = true;
         $parser = new Parser();
-        $message = $parser->parse($event->message->data);
+        try {
+            $message = $parser->parse($event->message->data);
+        } catch (InvalidAttachmentException $e) {
+            $this->logger->error('Email has invalid attachment '.$e->getMessage().' - '.json_encode($event->message));
+            return;
+        }
         $email = new Email();
         $email->setHeaders(explode("\n\n", $event->message->data)[0]);
         $email->setRaw($event->message->data);
         $email->setHtml($message->getHtmlBody());
         $email->setText($message->getTextBody());
+        $attachments = [];
+        if (count($message->getAttachments()) > 0) {
+            $attachments = array_map(function($item){
+                /**
+                 * @var Attachment $item
+                 */
+                return [
+                    'filename' => preg_replace('/\s/', '', urldecode($item->getFilename())),
+                    'contents' => base64_encode($item->getContent()),
+                    'type' => $item->getMimeType(),
+                ];
+            }, $message->getAttachments());
+        }
+        $email->setAttachments($attachments);
         $email->setSubject(mb_decode_mimeheader($message->getSubject()));
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());

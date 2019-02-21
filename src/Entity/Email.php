@@ -27,6 +27,11 @@ class Email
     private $raw;
 
     /**
+     * @ORM\Column(type="array", nullable=true, name="attachments")
+     */
+    private $attachments;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $subject;
@@ -224,6 +229,22 @@ class Email
     public function setRaw($raw)
     {
         $this->raw = $raw;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @param mixed $attachments
+     */
+    public function setAttachments($attachments)
+    {
+        $this->attachments = $attachments;
     }
 
 }
