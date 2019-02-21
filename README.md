@@ -10,11 +10,13 @@ However you can see all of them by simply opening the provided interface in any 
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
-- `php bin/console email:server`
+- `php bin/console email:server` to launch the SMTP server
+- `php bin/console server:start` to start Symfony's built-in webserver
 - Configure your other apps to use this new local SMTP server : 
   - host : 127.0.0.1
   - port: 2525
   - No user and no password
+- You can now view any emails you receive by opening http://localhost:8000 in your browser
   
 # Warning
 

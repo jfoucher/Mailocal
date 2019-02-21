@@ -39,11 +39,6 @@ class SmtpServerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $process = new Process(
-            ['php', 'bin/console','server:run']
-        );
-        $process->disableOutput();
-        $process->start();
         $this->server->setPort(2525);
         $this->server->create();
 
