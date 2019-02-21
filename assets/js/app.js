@@ -48,8 +48,8 @@ require('../scss/app.scss');
       console.log('text', text.replace(/\s/g,''), text.replace(/\s/g,'').length, text.length);
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
       $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
+      $('#html-content .no-content').remove();
       if (html.replace(/\s/g,'').length > 0) {
-        $('#html-content .no-content').remove();
         const iframe = $('#email-display-iframe');
         iframe.contents().find('html').html(html);
         iframe.show();
