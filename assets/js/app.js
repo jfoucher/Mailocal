@@ -44,6 +44,7 @@ require('../scss/app.scss');
       const tr = $(ev.currentTarget);
       const html = tr.find('script.html-email').html();
       const text = tr.find('script.text-email').html();
+      const attach = tr.find('.mailbox-attachment > a');
       console.log('text', text.replace(/\s/g,''), text.replace(/\s/g,'').length, text.length);
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
       $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
@@ -64,11 +65,26 @@ require('../scss/app.scss');
       $('#raw-content').html('<div class="email-text-content"><p>'+tr.find('script.raw-email').html().replace(/\n/gi, "<br>\n")+'</p></div>');
 
       $('.mailbox-firstline').hide();
+      const footer = $('.email-display .box-footer');
+      footer.html('');
+      footer.hide();
+      if (attach.length > 0) {
+        footer.show();
+        attach.each((i, item) => {
+          const $item = $(item);
+          $item.removeClass('max-80');
+          footer.append($item.clone());
+        });
+      }
+
     })
       .on('click', '.email-close', (ev) => {
-      $('.email-display').removeClass('col-md-8').css('display', 'none');
-      $('.email-list').addClass('col-md-12').removeClass('col-md-4').find('td > a').removeClass('max-80');
-      $('.mailbox-firstline').show();
+        $('.email-display').removeClass('col-md-8').css('display', 'none');
+        $('.email-list').addClass('col-md-12').removeClass('col-md-4').find('td > a').removeClass('max-80');
+        $('.mailbox-firstline').show();
+        const footer = $('.email-display .box-footer');
+        footer.html('');
+        footer.hide();
     })
   });
 

@@ -64,3 +64,47 @@
         background: #F9F9F9;
     }
 }
+
+.mailbox-attachment {
+    a {
+        color: #999;
+        font-size: 0.85em;
+        span {
+            display:inline;
+        }
+        i {
+            display:inline;
+            font-size: 1.4em;
+        }
+    }
+}
+.col-md-4 {
+    .mailbox-attachment {
+        a {
+            span {
+                display:none;
+            }
+        }
+    }
+}
+.email-display{
+    .box-footer {
+        a.attachment-download{
+
+            display:inline-block;
+            color: #999;
+            font-size: 0.9em;
+            span {
+                display:inline-block;
+            }
+            i {
+                font-weight: 200;
+                color: #333;
+                text-align:center;
+                display:block;
+                font-size: 3.4em;
+                line-height: 1.4em;
+            }
+        }
+    }
+}

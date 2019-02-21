@@ -58,15 +58,16 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $email->setHtml($message->getHtmlBody());
         $email->setText($message->getTextBody());
         $attachments = [];
-        if (count($message->getAttachments()) > 0) {
+        if (is_array($message->getAttachments()) && count($message->getAttachments()) > 0) {
             $attachments = array_map(function($item){
                 /**
                  * @var Attachment $item
                  */
                 return [
-                    'filename' => preg_replace('/\s/', '', urldecode($item->getFilename())),
+                    'filename' => preg_replace('/\s/', '', urldecode(mb_decode_mimeheader($item->getFilename()))),
                     'contents' => base64_encode($item->getContent()),
-                    'type' => $item->getMimeType(),
+                    'mimetype' => $item->getMimeType(),
+                    'type' => $this->mapTypes($item->getMimeType()),
                 ];
             }, $message->getAttachments());
         }
@@ -90,5 +91,50 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
 
     public function processAuthFailed(AuthFailedEvent $event) {
         $this->logger->error('Auth failed for user '.$event->username. ' with password '.$event->password);
+    }
+
+    protected function mapTypes($mimeType) {
+        $map = [
+            'application/vnd.ms-excel' => 'excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.template' => 'excel',
+            'application/vnd.ms-excel.sheet.macroEnabled.12' => 'excel',
+            'application/vnd.ms-excel.template.macroEnabled.12' => 'excel',
+            'application/vnd.ms-excel.addin.macroEnabled.12' => 'excel',
+            'application/vnd.ms-excel.sheet.binary.macroEnabled.1' => 'excel',
+            'application/msword' => 'word',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'word',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.template' => 'word',
+            'application/vnd.ms-word.document.macroEnabled.12' => 'word',
+            'application/vnd.ms-word.template.macroEnabled.12' => 'word',
+            'application/vnd.ms-powerpoint' => 'word',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'word',
+            'application/vnd.openxmlformats-officedocument.presentationml.template' => 'word',
+            'application/vnd.openxmlformats-officedocument.presentationml.slideshow' => 'word',
+            'application/vnd.ms-powerpoint.addin.macroEnabled.12' => 'word',
+            'application/vnd.ms-powerpoint.presentation.macroEnabled.12' => 'word',
+            'application/vnd.ms-powerpoint.slideshow.macroEnabled.12' => 'word',
+            'application/pdf' => 'pdf',
+            'application/x-bzip2' => 'archive',
+            'application/zip' => 'archive',
+            'application/vnd.ms-cab-compressed' => 'archive',
+            'application/x-7z-compressed' => 'archive',
+            'image/bmp' => 'image',
+            'image/cis-cod' => 'image',
+            'image/gif' => 'image',
+            'image/ief' => 'image',
+            'image/jpeg' => 'image',
+            'image/pipeg' => 'image',
+            'image/svg+xml' => 'image',
+            'image/tiff' => 'image',
+            'audio/mpeg' => 'audio',
+            'audio/basic' => 'audio',
+            'audio/mid' => 'audio',
+            'audio/x-wav' => 'audio',
+        ];
+        if (isset($map[$mimeType])) {
+            return $map[$mimeType];
+        }
+        return '';
     }
 }
