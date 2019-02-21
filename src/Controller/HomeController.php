@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-
     /**
      * @param \Swift_Mailer $mailer
      * @Route("/mail/{type}", name="mail")
@@ -75,13 +74,6 @@ class HomeController extends AbstractController
             $criteria[''];
         }
         $emails = $repository->allOrderedDateDesc($criteria);
-        $emails = array_map(function($email) {
-            /**
-             * @var Email $email
-             */
-            $email->firstLine = explode("\n", $email->getText())[0];
-            return $email;
-        }, $emails);
 
         return $this->render('home/index.html.twig', [
             'emails' => $emails,

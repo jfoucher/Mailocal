@@ -30,4 +30,23 @@ class EmailController extends AbstractController
             'message' => 'email deleted',
         ], 200);
     }
+    /**
+     * @param int $id
+     * @Route("/emails/markRead/{id}", name="markRead", methods={"PUT"})
+     * @return Response
+     */
+    public function markRead($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Email::class);
+        $em = $this->getDoctrine()->getManager();
+        $email = $repository->find((int)$id);
+        $email->setReadAt(new \DateTime());
+        $em->persist($email);
+        $em->flush();
+
+        return new JsonResponse([
+            'status' => 'ok',
+            'message' => 'email marked as read',
+        ], 200);
+    }
 }

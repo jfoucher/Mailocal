@@ -45,7 +45,14 @@ require('../scss/app.scss');
       const html = tr.find('script.html-email').html();
       const text = tr.find('script.text-email').html();
       const attach = tr.find('.mailbox-attachment > a');
-      console.log('text', text.replace(/\s/g,''), text.replace(/\s/g,'').length, text.length);
+      // Mark Read
+      $.ajax({
+        url: tr.data('markread'),
+        method: 'put'
+      }).then((res) => {
+        tr.addClass('read');
+      });
+      $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
       $('.email-list').removeClass('col-md-12').addClass('col-md-4');
       $('#html-content .no-content').remove();
@@ -64,7 +71,6 @@ require('../scss/app.scss');
       }
       $('#raw-content').html('<div class="email-text-content"><p>'+tr.find('script.raw-email').html().replace(/\n/gi, "<br>\n")+'</p></div>');
 
-      $('.mailbox-firstline').hide();
       const footer = $('.email-display .box-footer');
       footer.html('');
       footer.hide();
@@ -81,6 +87,7 @@ require('../scss/app.scss');
         $('.email-display').removeClass('col-md-8').css('display', 'none');
         $('.email-list').addClass('col-md-12').removeClass('col-md-4');
         $('.mailbox-firstline').show();
+        $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
         const footer = $('.email-display .box-footer');
         footer.html('');
         footer.hide();

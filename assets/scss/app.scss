@@ -8,6 +8,7 @@
         display:block;
         font-size: 0.8em;
         color: #aaa;
+        font-weight: 300;
     }
 }
 .treeview-menu {
@@ -23,13 +24,6 @@
     }
 }
 
-.mailbox-messages {
-    max-height: 600px;
-    overflow-y: scroll;
-    tr {
-        cursor: pointer;
-    }
-}
 
 .col-md-8, .col-md-12, .col-md-4, .email-display{
     transition: all 100ms; //replace 200ms with time of your choice
@@ -105,12 +99,49 @@
                 display:inline-block;
             }
             i {
-                font-weight: 200;
                 color: #333;
                 text-align:center;
                 display:block;
                 font-size: 3.4em;
                 line-height: 1.4em;
+            }
+        }
+    }
+}
+.mailbox-date {
+    color: #999;
+    font-size: 0.9em;
+    display: block;
+}
+.mailbox-messages {
+    max-height: 600px;
+    overflow-y: scroll;
+    tr {
+        cursor: pointer;
+        &.read {
+            background: #FBFBFB;
+            .mailbox-name {
+                color: #999;
+                font-weight: 300;
+            }
+            .mailbox-attachment {
+                a {
+                    color: #ccc;
+                }
+            }
+            .mailbox-subject {
+                b {
+                    color: #999;
+                    font-weight: 300;
+                }
+                .mailbox-firstline {
+                    color: #ccc;
+                    font-weight: 300;
+                }
+            }
+            .mailbox-date {
+                color: #ccc;
+                font-weight: 300;
             }
         }
     }
