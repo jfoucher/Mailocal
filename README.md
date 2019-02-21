@@ -13,6 +13,7 @@ However you can see all of them by simply opening the provided interface in any 
 - Copy `.env.example` to `.env.local` and set your database connection parameters.
 - Run `php bin/console doctrine:database:create` to create the database
 - Run `php bin/console doctrine:migrations:migrate` to create the database schema
+- Run `yarn run build` to build the frontend assets
 - `php bin/console email:server` to launch the SMTP server
 - `php bin/console server:start` to start Symfony's built-in webserver
 - Configure your other apps to use this new local SMTP server : 
