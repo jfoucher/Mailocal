@@ -61,7 +61,7 @@ require('../scss/app.scss');
       } else {
         $('#text-content').html('<div class="no-content"><p>Aucun contenu texte pour cet email</p></div>');
       }
-      $('#raw-content').html(tr.find('script.raw-email').html());
+      $('#raw-content').html('<div class="email-text-content"><p>'+tr.find('script.raw-email').html().replace(/\n/gi, "<br>\n")+'</p></div>');
 
       $('.mailbox-firstline').hide();
     })

@@ -4,6 +4,7 @@ all_recipients: Tous les destinataires
 subject: Sujet
 date: Date
 Text: Texte
+Raw: Source
 inbox: Boîte de réception
 index_title: Mailocal - Serveur SMTP local de développement
 index_page_title: Email locaux
