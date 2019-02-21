@@ -53,7 +53,7 @@ require('../scss/app.scss');
         tr.addClass('read');
       });
       $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
-      $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
+      $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').html(tr.data('title'));
       $('.email-list').removeClass('col-md-12').addClass('col-md-4');
       $('#html-content .no-content').remove();
       if (html.replace(/\s/g,'').length > 0) {

@@ -89,6 +89,21 @@
     box-shadow: none;
 }
 .email-display{
+    .box-title {
+        span.addresses {
+            font-size: 0.75em;
+            font-weight: 300;
+            margin-top: .5em;
+            color: #999;
+            display:block;
+        }
+        span.subject-label {
+            display:none;
+        }
+        span.subject {
+
+        }
+    }
     .box-footer {
         a.attachment-download{
 

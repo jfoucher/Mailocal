@@ -59,7 +59,7 @@
                             </thead>
                             <tbody>
                             {% for email in emails %}
-                            <tr data-markread="{{ path('markRead', {'id': email.id}) }}" class="{{ email.readAt ? 'read' : '' }}">
+                            <tr data-markread="{{ path('markRead', {'id': email.id}) }}" class="{{ email.readAt ? 'read' : '' }}" data-title=" <span class='subject-label'>{{ 'Subject:'|trans() }}</span> <span class='subject'>{{ email.subject }}</span> <span class='addresses'>{{ 'From:'|trans() }} {{ email.from }} {{ 'To:'|trans() }} {{ email.to }}</span>">
                                 <td>
                                     <input data-link="{{ path('deleteEmail', {'id': email.id}) }}" type="checkbox" style="position: absolute; opacity: 0;">
                                     <script class="html-email" type="text/template">
