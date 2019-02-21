@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Email\Parser;
 use App\Smtp\CustomServer;
@@ -34,12 +35,19 @@ class SmtpServerCommand extends Command
     {
         $this
             ->setDescription('SMTP server.')
-        ;
+
+        ->addOption(
+            'port',
+            'p',
+            InputOption::VALUE_OPTIONAL,
+            'Which port should the SMTP server run on?',
+            2525
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->server->setPort(2525);
+        $this->server->setPort($input->getOption('port'));
         $this->server->create();
 
 
