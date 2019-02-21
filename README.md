@@ -8,7 +8,7 @@ However you can see all of them by simply opening the provided interface in any 
 
 # Requirements
 - [git](https://git-scm.com/downloads)
-- [yarn]() or [npm]()
+- [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/)
 - [composer](https://getcomposer.org)
 
 # Installation
