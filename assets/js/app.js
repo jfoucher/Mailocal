@@ -35,7 +35,6 @@ require('../scss/app.scss');
           url: $item.data('link'),
           method: 'delete'
         }).then((res) => {
-          console.log('deleted', res);
           $item.parents('tr').remove();
         })
       })
@@ -44,7 +43,6 @@ require('../scss/app.scss');
     $('body').on('click', '.mailbox-messages table tbody > tr', (ev) => {
       const tr = $(ev.currentTarget);
       const html = tr.find('script.html-email');
-      console.log('html', html.html());
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
       $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
       $('#email-display-iframe').contents().find('html').html(html.html())
