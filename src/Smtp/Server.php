@@ -117,6 +117,9 @@ class Server implements EventEmitterInterface {
     $session->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($instance) {
       $instance->emit(SessionInterface::EVENT_SMTP_RECEIVED, [$message]);
     });
+    $session->on(CustomSession::EVENT_SMTP_AUTH_FAILED, function (Message $message, $username, $password) use ($instance) {
+      $instance->emit(CustomSession::EVENT_SMTP_AUTH_FAILED, [$message, $username, $password]);
+    });
     $session->run();
   }
 

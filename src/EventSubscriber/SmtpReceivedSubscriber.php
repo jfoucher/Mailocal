@@ -9,6 +9,8 @@
 namespace App\EventSubscriber;
 use App\Email\Parser;
 use App\Entity\Email;
+use App\Smtp\AuthFailedEvent;
+use App\Smtp\CustomSession;
 use App\Smtp\MessageReceivedEvent;
 use App\Smtp\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,9 +31,12 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            SessionInterface::EVENT_SMTP_RECEIVED => [
+            CustomSession::EVENT_SMTP_RECEIVED => [
                 ['processSmtpConnection', 10],
-            ]
+            ],
+            CustomSession::EVENT_SMTP_AUTH_FAILED => [
+                ['processAuthFailed', 10],
+            ],
         ];
     }
 
@@ -60,5 +65,9 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         }catch (\Exception $e) {
             $this->logger->error('Email NOT saved');
         }
+    }
+
+    public function processAuthFailed(AuthFailedEvent $event) {
+        $this->logger->error('Auth failed for user '.$event->username. ' with password '.$event->password);
     }
 }

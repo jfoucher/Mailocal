@@ -37,6 +37,7 @@ class ServerSymfony extends Server {
     parent::__construct($host, $port, $log, $loop, $sessionClass);
     $this->dispatcher = $dispatcher;
     $this->on(SessionInterface::EVENT_SMTP_RECEIVED, [$this, 'onMessageReceived']);
+    $this->on(CustomSession::EVENT_SMTP_AUTH_FAILED, [$this, 'onAuthFailed']);
   }
 
   /**
@@ -49,6 +50,17 @@ class ServerSymfony extends Server {
     // It will also be fun to dispatch this as a symfony event.
     $event = new MessageReceivedEvent($message);
     $this->dispatcher->dispatch(SessionInterface::EVENT_SMTP_RECEIVED, $event);
+  }
+
+  /**
+   * Listener for auth failed.
+   *
+   * @param Message $message
+   *   Mail message.
+   */
+  public function onAuthFailed(Message $message, $username, $password) {
+    $event = new AuthFailedEvent($message, $username, $password);
+    $this->dispatcher->dispatch(CustomSession::EVENT_SMTP_AUTH_FAILED, $event);
   }
 
 }
