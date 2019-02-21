@@ -11,6 +11,52 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+    /**
+     * @param \Swift_Mailer $mailer
+     * @Route("/mail/{type}", name="mail")
+     * @return Response
+     */
+    public function mail(\Swift_Mailer $mailer, $type = null)
+    {
+        if ($type === 'text') {
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('send@example.com')
+                ->setTo('recipient@example.com')
+                ->setSubject('Text email subject')
+                ->setBody('TEXT TEST EMAIL',
+                    'text/plain'
+                )
+            ;
+
+        } elseif ($type === 'html') {
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('send@example.com')
+                ->setTo('recipient@example.com')
+                ->setSubject('HTML email subject')
+                ->setBody('<html><body>HTML ONLY</body></html>',
+                    'text/html'
+                )
+            ;
+
+        } else {
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('send@example.com')
+                ->setTo('recipient@example.com')
+                ->setSubject('Both email subject')
+                ->setBody('<html><body>TEST TEST</body></html>',
+                    'text/html'
+                )
+                ->addPart('TES TESTESTEST',
+                    'text/plain'
+                )
+            ;
+        }
+
+        $mailer->send($message);
+        return new Response('ok');
+    }
+
     /**
      * @Route("/{email}", name="home")
      */
@@ -44,26 +90,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @param \Swift_Mailer $mailer
-     * @Route("/mail", name="mail")
-     * @return Response
-     */
-    public function mail(\Swift_Mailer $mailer)
-    {
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
-            ->setSubject('test subject')
-            ->setBody('<html><body>TEST TEST</body></html>',
-                'text/html'
-            )
-            ->addPart('TES TESTESTEST',
-                'text/plain'
-            )
-        ;
-
-        $mailer->send($message);
-        return new Response('ok');
-    }
 }
