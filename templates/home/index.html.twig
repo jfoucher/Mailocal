@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mailocal - Local SMTP server and email display{% endblock %}
+{% block title %}{{ 'index_title'|trans() }}{% endblock %}
 
-{% block page_title %}Local emails{% endblock %}
-{% block page_subtitle %}Emails received locally will be shown here{% endblock %}
+{% block page_title %}{{ 'index_page_title'|trans() }}{% endblock %}
+{% block page_subtitle %}{{ 'index_page_subtitle'|trans() }}{% endblock %}
 {% block page_content %}
 
     <div class="row" style="display:flex;">
@@ -12,7 +12,7 @@
         <div class="col-md-12 email-list">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Inbox</h3>
+                    <h3 class="box-title">{{ 'inbox'|trans() }}</h3>
 
                     <div class="box-tools pull-right">
                         <div class="has-feedback">
@@ -52,10 +52,10 @@
                             <thead>
                             <tr>
                                 <td></td>
-                                <td>Destinataire</td>
-                                <td>Sujet</td>
+                                <td>{{ 'recipient'|trans() }}</td>
+                                <td>{{ 'subject'|trans() }}</td>
                                 <td></td>
-                                <td>Date</td>
+                                <td>{{ 'date'|trans() }}</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,6 +65,12 @@
                                     <input data-link="{{ path('deleteEmail', {'id': email.id}) }}" type="checkbox" style="position: absolute; opacity: 0;">
                                     <script class="html-email" type="text/template">
                                         {{ email.html|raw }}
+                                    </script>
+                                    <script class="text-email" type="text/template">
+                                        {{ email.text|raw }}
+                                    </script>
+                                    <script class="raw-email" type="text/template">
+                                        {{ email.raw|raw }}
                                     </script>
                                 </td>
                                 <td class="mailbox-name">
@@ -119,7 +125,34 @@
                     </div>
                 </div>
                 <div class="box-body no-padding">
-                    <iframe width="100%" height="100%" frameborder="0" style="min-height:500px;display:block;flex:1" id="email-display-iframe" src=""></iframe>
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#html-content" data-toggle="tab" aria-expanded="false">HTML</a>
+                            </li>
+                            <li>
+                                <a href="#text-content" data-toggle="tab" aria-expanded="true">{{ 'Text'|trans() }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="html-content">
+                                <iframe width="100%" height="100%" frameborder="0" style="min-height:500px;display:block;flex:1" id="email-display-iframe" src=""></iframe>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="text-content">
+
+                            </div>
+
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="raw-content">
+
+                            </div>
+
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+
                 </div>
             </div>
         </div>

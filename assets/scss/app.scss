@@ -38,3 +38,29 @@
 .col-md-8, .col-md-12, .col-md-4, .email-display{
     transition: all 100ms; //replace 200ms with time of your choice
 }
+
+.no-content {
+    text-align: center;
+    p {
+        font-weight: 300;
+        width: 80%;
+        margin: 2em 10%;
+        line-height: 130px;
+        color: #aaa;
+        border: 1px solid #eee;
+        background: #f6f6f6;
+    }
+}
+
+.email-text-content {
+    p {
+        padding: 2em 1em;
+        font-weight: 300;
+        width: 100%;
+        margin: 2em 0;
+        line-height: 1.5em;
+        color: #777;
+        border: 1px solid #eee;
+        background: #F9F9F9;
+    }
+}

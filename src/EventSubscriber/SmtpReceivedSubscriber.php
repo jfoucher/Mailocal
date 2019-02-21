@@ -42,6 +42,7 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $message = $parser->parse($event->message->data);
         $email = new Email();
         $email->setHeaders(explode("\n\n", $event->message->data)[0]);
+        $email->setRaw($event->message->data);
         $email->setHtml($message->getHtmlBody());
         $email->setText($message->getTextBody());
         $email->setSubject(mb_decode_mimeheader($message->getSubject()));

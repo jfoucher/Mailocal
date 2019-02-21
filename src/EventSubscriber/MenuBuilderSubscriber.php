@@ -33,9 +33,9 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
         $recipients = $this->repo->getRecipients();
         $total = $this->repo->count(['deletedAt' => null]);
 
-        $inbox = new MenuItemModel('all_recipients', 'Destinataires', 'home', [], 'fas fa-users');
+        $inbox = new MenuItemModel('all_recipients', 'recipients', 'home', [], 'fas fa-users');
         $all = new MenuItemModel('all',
-            'Tous les destinataires',
+            'all_recipients',
             'home',
             [],
             'fas fa-inbox',

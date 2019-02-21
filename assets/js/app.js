@@ -42,10 +42,27 @@ require('../scss/app.scss');
 
     $('body').on('click', '.mailbox-messages table tbody > tr', (ev) => {
       const tr = $(ev.currentTarget);
-      const html = tr.find('script.html-email');
+      const html = tr.find('script.html-email').html();
+      const text = tr.find('script.text-email').html();
+      console.log('text', text.replace(/\s/g,''), text.replace(/\s/g,'').length, text.length);
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
       $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
-      $('#email-display-iframe').contents().find('html').html(html.html())
+      if (html.replace(/\s/g,'').length > 0) {
+        $('#html-content .no-content').remove();
+        const iframe = $('#email-display-iframe');
+        iframe.contents().find('html').html(html);
+        iframe.show();
+      } else {
+        $('#email-display-iframe').hide();
+        $('#html-content').append('<div class="no-content"><p>Aucun contenu HTML pour cet email</p></div>');
+      }
+      if (text.replace(/\s/g,'').length > 0) {
+        $('#text-content').html('<div class="email-text-content"><p>'+text.replace(/\n/gi, "<br>\n")+'</p></div>');
+      } else {
+        $('#text-content').html('<div class="no-content"><p>Aucun contenu texte pour cet email</p></div>');
+      }
+      $('#raw-content').html(tr.find('script.raw-email').html());
+
       $('.mailbox-firstline').hide();
     })
       .on('click', '.email-close', (ev) => {

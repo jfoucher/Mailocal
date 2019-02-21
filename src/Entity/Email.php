@@ -22,6 +22,11 @@ class Email
     private $text;
 
     /**
+     * @ORM\Column(type="text", nullable=true, name="raw_content")
+     */
+    private $raw;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $subject;
@@ -203,6 +208,22 @@ class Email
     public function setDeletedAt($deletedAt)
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param mixed $raw
+     */
+    public function setRaw($raw)
+    {
+        $this->raw = $raw;
     }
 
 }
