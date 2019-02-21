@@ -47,7 +47,7 @@ require('../scss/app.scss');
       const attach = tr.find('.mailbox-attachment > a');
       console.log('text', text.replace(/\s/g,''), text.replace(/\s/g,'').length, text.length);
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').text(tr.find('.mailbox-subject > b').text());
-      $('.email-list').removeClass('col-md-12').addClass('col-md-4').find('td > a').addClass('max-80');
+      $('.email-list').removeClass('col-md-12').addClass('col-md-4');
       $('#html-content .no-content').remove();
       if (html.replace(/\s/g,'').length > 0) {
         const iframe = $('#email-display-iframe');
@@ -72,7 +72,6 @@ require('../scss/app.scss');
         footer.show();
         attach.each((i, item) => {
           const $item = $(item);
-          $item.removeClass('max-80');
           footer.append($item.clone());
         });
       }
@@ -80,7 +79,7 @@ require('../scss/app.scss');
     })
       .on('click', '.email-close', (ev) => {
         $('.email-display').removeClass('col-md-8').css('display', 'none');
-        $('.email-list').addClass('col-md-12').removeClass('col-md-4').find('td > a').removeClass('max-80');
+        $('.email-list').addClass('col-md-12').removeClass('col-md-4');
         $('.mailbox-firstline').show();
         const footer = $('.email-display .box-footer');
         footer.html('');

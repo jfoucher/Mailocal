@@ -23,22 +23,20 @@
     }
 }
 
-.max-80 {
-    max-width: 80px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-}
-
 .mailbox-messages {
     max-height: 600px;
     overflow-y: scroll;
+    tr {
+        cursor: pointer;
+    }
 }
 
 .col-md-8, .col-md-12, .col-md-4, .email-display{
     transition: all 100ms; //replace 200ms with time of your choice
 }
-
+.mailbox-name {
+    color: #666;
+}
 .no-content {
     text-align: center;
     p {
@@ -85,6 +83,12 @@
                 display:none;
             }
         }
+    }
+    .mailbox-name {
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
     }
 }
 .email-display{
