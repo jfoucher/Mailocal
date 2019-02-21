@@ -11,4 +11,11 @@ However you can see all of them by simply opening the provided interface in any 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
 - `php bin/console email:server`
+- Configure your other apps to use this new local SMTP server : 
+  - host : 127.0.0.1
+  - port: 2525
+  - No user and no password
+  
+# Warning
 
+Never use this in production, only run it on your local machine.
