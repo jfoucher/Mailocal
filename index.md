@@ -1,5 +1,17 @@
 ---
 title: Mailocal
+layout: splash
+header:
+  overlay_color: "#000"
+  overlay_filter: "0.5"
+  overlay_image: https://source.unsplash.com/daily
+  actions:
+    - label: "Download"
+      url: "https://github.com/jfoucher/mailocal"
+  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
+excerpt: "Debug your emails, making sure real customers don't receive them"
+intro: 
+  - excerpt: "Local SMTP server with interface to view received messages"
 ---
 
 
