@@ -6,5 +6,5 @@ kramdown:
   hard_wrap: false
 future: true
 jailed: false
-theme: jekyll-theme-primer
+remote_theme: mmistakes/minimal-mistakes
 gfm_quirks: paragraph_end
