@@ -11,6 +11,7 @@
         font-weight: 300;
     }
 }
+
 .treeview-menu {
     li {
         a {
@@ -71,6 +72,14 @@
     }
 }
 .col-md-4 {
+    .mailbox-subject {
+        max-width: 200px;
+        b {
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+    }
     .mailbox-attachment {
         a {
             span {
