@@ -38,20 +38,26 @@ require('../scss/app.scss');
           $item.parents('tr').remove();
         })
       })
-    })
-
+    });
+    let to = null;
     $('body').on('click', '.mailbox-messages table tbody > tr', (ev) => {
       const tr = $(ev.currentTarget);
       const html = tr.find('script.html-email').html();
       const text = tr.find('script.text-email').html();
       const attach = tr.find('.mailbox-attachment > a');
       // Mark Read
-      $.ajax({
-        url: tr.data('markread'),
-        method: 'put'
-      }).then((res) => {
-        tr.addClass('read');
-      });
+      if (to) {
+        clearTimeout(to);
+      }
+      to = setTimeout(() => {
+        $.ajax({
+          url: tr.data('markread'),
+          method: 'put'
+        }).then((res) => {
+          tr.addClass('read');
+        });
+      }, 2000);
+
       $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').html(tr.data('title'));
       $('.email-list').removeClass('col-md-12').addClass('col-md-4');
