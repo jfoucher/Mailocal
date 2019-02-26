@@ -9,3 +9,11 @@ jailed: false
 remote_theme: mmistakes/minimal-mistakes
 gfm_quirks: paragraph_end
 plugins: [jekyll-include-cache]
+
+title: Mailocal
+title_separator: "|"
+description: "A local SMTP server to debug your app's emails while making sure that your real clients never see them"
+url: "https://mailocal.jfoucher.com"
+baseurl: "/"
+repository: "jfoucher/mailocal"
+
