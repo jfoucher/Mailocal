@@ -6,11 +6,11 @@
 {% block page_subtitle %}{{ 'index_page_subtitle'|trans() }}{% endblock %}
 {% block page_content %}
 
-    <div class="row" style="display:flex;">
+    <div class="row" style="display:flex; height: 100%">
 
         <!-- /.col -->
-        <div class="col-md-12 email-list">
-            <div class="box box-primary">
+        <div class="col-md-12 email-list"  style="height: 100%">
+            <div class="box box-primary" style="height: 100%">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ 'inbox'|trans() }}</h3>
 
@@ -26,27 +26,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                    <div class="mailbox-controls">
-                        <!-- Check all button -->
-                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                        </button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm trash"><i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                        <div class="pull-right">
-                            1-50/200
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                            </div>
-                            <!-- /.btn-group -->
-                        </div>
-                        <!-- /.pull-right -->
-                    </div>
+                    {% include 'partials/mailbox-controls.html.twig' %}
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover">
                             <thead>
@@ -94,29 +74,9 @@
                     <!-- /.mail-box-messages -->
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer no-padding">
-                    <div class="mailbox-controls">
-                        <!-- Check all button -->
-                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                        </button>
-                        <div class="btn-group">
-                            <button type="button" class="trash btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                        <div class="pull-right">
-                            1-50/200
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                            </div>
-                            <!-- /.btn-group -->
-                        </div>
-                        <!-- /.pull-right -->
-                    </div>
-                </div>
+                {#<div class="box-footer no-padding">#}
+                    {#{% include 'partials/mailbox-controls.html.twig' %}#}
+                {#</div>#}
             </div>
             <!-- /. box -->
         </div>

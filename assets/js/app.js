@@ -39,6 +39,22 @@ require('../scss/app.scss');
         })
       })
     });
+
+    $('.mark-read').on('click', (ev) => {
+      const btn = $(ev.currentTarget);
+      $(".mailbox-messages input[type='checkbox']:checked").each((i, item) => {
+        const $item = $(item);
+        const curTr = $item.parents('tr');
+        if (!curTr.hasClass('read')) {
+          $.ajax({
+            url: $item.parents('tr').data('markread'),
+            method: 'put'
+          }).then((res) => {
+            $item.parents('tr').addClass('read');
+          })
+        }
+      })
+    });
     let to = null;
     $('body').on('click', '.mailbox-messages table tbody > tr', (ev) => {
       const tr = $(ev.currentTarget);
@@ -49,14 +65,17 @@ require('../scss/app.scss');
       if (to) {
         clearTimeout(to);
       }
-      to = setTimeout(() => {
-        $.ajax({
-          url: tr.data('markread'),
-          method: 'put'
-        }).then((res) => {
-          tr.addClass('read');
-        });
-      }, 2000);
+      if (!tr.hasClass('read')) {
+        to = setTimeout(() => {
+          $.ajax({
+            url: tr.data('markread'),
+            method: 'put'
+          }).then((res) => {
+            tr.addClass('read');
+          });
+        }, 2000);
+      }
+
 
       $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
       $('.email-display').addClass('col-md-8').css('display', 'flex').find('.box-title').html(tr.data('title'));
