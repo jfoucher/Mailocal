@@ -42,6 +42,7 @@ class PostfixReceiveCommand extends Command
         $this->addArgument('sender');
         $this->addArgument('size');
         $this->addArgument('recipient');
+        $this->addArgument('username', InputArgument::OPTIONAL);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -58,8 +59,11 @@ class PostfixReceiveCommand extends Command
         $this->logger->info($input->getArgument('sender'));
         $this->logger->info($input->getArgument('size'));
         $this->logger->info($input->getArgument('recipient'));
+        $this->logger->info($input->getArgument('username'));
         $message = new Message();
         $message->data = $contents;
+        $message->username = $input->getArgument('username');
+
         $this->dispatcher->dispatch(CustomSession::EVENT_SMTP_RECEIVED, new MessageReceivedEvent($message));
     }
 }
