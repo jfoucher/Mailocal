@@ -3,12 +3,16 @@ title: Mailocal
 layout: home
 excerpt: Debug your emails while making sure real customers never see them.
 intro: Safely test your application's emails by using this local SMTP server and viewing the results in the web interface.
-
+intro2: By using this locally installed SMTP server you can be sure that your real customers will never see your test emails! However you can see all of them by simply opening the provided interface in any browser.
+images:
+  - title: Main interface view
+    image: assets/img/img1.png
+    link: assets/img/img1.png
+  - title: Viewing messages details
+    image: assets/img/img2.png
+    link: assets/img/img2.png
 ---
 
-By using this locally installed SMTP server you can be sure that your real customers will never see your test emails !
-
-However you can see all of them by simply opening the provided interface in any browser.
 
 ## Installation
 

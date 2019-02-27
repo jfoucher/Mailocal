@@ -8,17 +8,50 @@ body {
     font-family: "Helvetica Neue", Geneva, sans-serif;
     margin: 0;
     padding:0;
+    box-sizing: border-box;
+}
+.dark {
+    color: #f2f1e3;
+    background: #272632;
+}
+.small {
+    font-size: 0.8em;
+    font-weight: 200;
+}
+a {
+    color: #272632;
+}
+a:hover, a:focus {
+    color: #373546;
+}
+a:visited {
+    color: #686679;
+}
+a.dark {
+    color: #f2f1e3;
+}
+a.dark:hover, a.dark:focus {
+    color: #f5f4e6;
+}
+a.dark:visited {
+    color: #f2f1e3;
+}
+.clear {
+    color: #333;
 }
 .container {
-    > div {
+    .med {
         max-width: 600px;
+        margin: 0 auto;
+    }
+    .wide {
+        max-width: 900px;
         margin: 0 auto;
     }
 }
 .header {
     padding: 2em 0;
     text-align: center;
-    color: #333;
     h1 {
         font-weight: 200;
         font-size: 6em;
@@ -27,19 +60,79 @@ body {
     }
     p {
         font-weight: 200;
-        color: #333;
+    }
+    .cta {
+        margin-top: 3em;
+        a {
+            border-radius: 2px;
+            font-weight: 400;
+            font-size: 1.1em;
+            margin: 0 1em;
+            border: 1px solid #666;
+            padding: 0.8em 2.4em ;
+            text-decoration: none;
+        }
     }
 }
 .intro {
     font-size: 1.3em;
 
     padding: 3em 0;
-    color: #fff;
-    background: #272632;
 }
+.images {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-top: 2em;
+    .image {
+        flex:1;
+        margin: 0 1em;
+        img {
+            width: 100%;
+        }
+        .caption {
+            text-align: center;
+            font-weight: 200;
+            font-size: 0.8em;
+        }
+    }
+}
+
+.intro2 {
+    padding: 3em 0;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    background: #fff;
+    font-size: 1.5em;
+    font-weight: 200;
+    line-height: 1.6em;
+    text-align: center;
+}
+
 .content {
-    background: #333;
-    color: #fff;
     padding: 2em 0;
+    line-height: 1.4em;
+    h2 {
+        font-size: 3em;
+        font-weight: 200;
+        color: #333;
+        text-align: center;
+    }
+}
+.footer .wide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .item {
+        padding: 2em;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+code {
+    background: #faf4eb;
+    padding: 0.5em;
 }
 

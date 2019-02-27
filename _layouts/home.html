@@ -3,18 +3,47 @@ layout: default
 ---
 
 <div class="container header">
-    <div>
+    <div class="med">
         <h1>{{ page.title }}</h1>
         <p>{{ page.excerpt }}</p>
+        <p class="cta">
+            <a href="#main">Install</a>
+            <a class="dark" href="https://github.com/jfoucher/mailocal">Github</a>
+        </p>
     </div>
 </div>
-<div class="container intro">
-    <div>
+<div class="container intro dark">
+    <div class="med">
         {{ page.intro }}
     </div>
+    {% if page.images %}
+    <div class="wide images">
+        {% for image in page.images %}
+        <div class="image">
+            {% if image.link %}
+            <a href="{{ image.link }}" target="_blank">
+            {% endif %}
+            <img src="{{ image.image }}" />
+            {% if image.link %}
+            </a>
+            {% endif %}
+            <p class="caption">
+                <em>{{ image.title }}</em>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
-<div class="container content">
-    <div>
+{% if page.intro2 %}
+<div class="container intro2">
+    <div class="wide">
+        {{ page.intro2 }}
+    </div>
+</div>
+{% endif %}
+<div class="container content" id="main">
+    <div class="med">
         {{ content }}
     </div>
 </div>
