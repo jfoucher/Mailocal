@@ -6,9 +6,8 @@ kramdown:
   hard_wrap: false
 future: true
 jailed: false
-remote_theme: mmistakes/minimal-mistakes
+
 gfm_quirks: paragraph_end
-plugins: [jekyll-include-cache]
 
 title: Mailocal
 title_separator: "|"
