@@ -4,3 +4,42 @@
 
 @charset "utf-8";
 
+body {
+    font-family: "Helvetica Neue", Geneva, sans-serif;
+    margin: 0;
+    padding:0;
+}
+.container {
+    > div {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+.header {
+    padding: 2em 0;
+    text-align: center;
+    color: #333;
+    h1 {
+        font-weight: 200;
+        font-size: 6em;
+        margin: .2em;
+        color: #111;
+    }
+    p {
+        font-weight: 200;
+        color: #333;
+    }
+}
+.intro {
+    font-size: 1.3em;
+
+    padding: 3em 0;
+    color: #fff;
+    background: #272632;
+}
+.content {
+    background: #333;
+    color: #fff;
+    padding: 2em 0;
+}
+

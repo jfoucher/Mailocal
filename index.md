@@ -1,23 +1,23 @@
 ---
 title: Mailocal
-layout: default
+layout: home
+excerpt: Debug your emails while making sure real customers never see them.
+intro: Safely test your application's emails by using this local SMTP server and viewing the results in the web interface.
 
 ---
-
-
-
-Safely test sending your emails by using this local SMTP server and viewing the results on the web interface.
 
 By using this locally installed SMTP server you can be sure that your real customers will never see your test emails !
 
 However you can see all of them by simply opening the provided interface in any browser.
 
-## Requirements
+## Installation
+
+### Requirements
 - [git](https://git-scm.com/downloads)
 - [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/)
 - [composer](https://getcomposer.org)
 
-## Installation
+### Install
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
@@ -32,7 +32,7 @@ Alternatively you can:
 - `php bin/console email:server` to launch the SMTP server
 - `php bin/console server:start` to start Symfony's built-in webserver
 
-## Configuration
+### Configuration
 
 - Configure your other apps to use this new local SMTP server : 
   - host : `127.0.0.1`
@@ -40,11 +40,11 @@ Alternatively you can:
   - You can configure an SMTP username and password by setting the `SMTP_SERVER_USER` and `SMTP_SERVER_PASSWORD`
  fields in you .env.local file. Make sure you update your email client's credentials accordingly.
  
-## Done
+### Done
 You can now view any emails you receive by opening http://localhost:8000 in your browser
 
 The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`
   
-## Warning
+### Warning
 
 Never use this in production, only run it on your local machine.
