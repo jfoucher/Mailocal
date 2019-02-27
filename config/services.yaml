@@ -23,3 +23,9 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    app.command.smtp:
+        public: true
+        class: 'App\Command\SmtpServerCommand'
+        arguments:
+            - 'App\Smtp\CustomServer'

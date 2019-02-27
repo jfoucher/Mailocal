@@ -1,0 +1,11 @@
+{
+  "chmod": "0700",
+  "main": "./bin/mailocal",
+  "files-bin": [
+    "./bin/console"
+  ],
+  "force-autodiscovery": true,
+  "directories-bin": [
+    "./"
+  ]
+}
