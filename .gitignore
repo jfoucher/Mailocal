@@ -1,2 +1,6 @@
 .idea
 _site
+vendor
+var
+public
+.env
