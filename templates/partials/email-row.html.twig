@@ -1,0 +1,27 @@
+<tr data-id="{{ email.id }}" data-markread="{{ path('markRead', {'id': email.id}) }}" class="{{ email.readAt ? 'read' : '' }}" data-title=" <span class='subject-label'>{{ 'Subject:'|trans() }}</span> <span class='subject'>{{ email.subject }}</span> <span class='addresses'>{{ 'From:'|trans() }} {{ email.from }} {{ 'To:'|trans() }} {{ email.to }}</span>">
+    <td>
+        <input data-link="{{ path('deleteEmail', {'id': email.id}) }}" type="checkbox" style="position: absolute; opacity: 0;">
+        <script class="html-email" type="text/template">
+            {{ email.html|raw }}
+        </script>
+        <script class="text-email" type="text/template">
+            {{ email.text|raw }}
+        </script>
+        <script class="raw-email" type="text/template">
+            {{ email.raw }}
+        </script>
+        {{ email.id }}
+    </td>
+    <td class="mailbox-name">
+        {{ email.to }}
+        <span class="mailbox-date" title="{{ email.createdAt|date('Y-m-d H:i:s')}}">{{ email.createdAt|time_diff }}</span>
+    </td>
+    <td class="mailbox-subject">
+        <b>{{ email.subject }}</b><span class="mailbox-firstline">{{ email.firstLine }}</span>
+    </td>
+    <td class="mailbox-attachment">
+        {% for attachment in email.attachments %}
+            <a download="{{ attachment.filename }}" class="attachment-download" href="data:{{ attachment.mimetype is defined ? attachment.mimetype : attachment.type }};charset=utf-8;base64,{{ attachment.contents }}"><i class="fa fa-file{{ attachment.type ? '-'~attachment.type : '' }}-o"></i> <span>{{ attachment.filename }}</span></a>
+        {% endfor %}
+    </td>
+</tr>

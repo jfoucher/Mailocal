@@ -17,10 +17,13 @@
 namespace App\Controller;
 
 use App\Entity\Email;
+use App\Repository\EmailRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class EmailController extends AbstractController
 {
@@ -67,5 +70,27 @@ class EmailController extends AbstractController
             'status' => 'ok',
             'message' => 'email marked as read',
         ], 200);
+    }
+
+    /**
+     * @param int $last
+     * @Route("/emails/new/{last}", name="newEmails", methods={"GET"})
+     * @return Response
+     */
+    public function newEmails($last)
+    {
+        /**
+         * @var EmailRepository $repository
+         */
+        $repository = $this->getDoctrine()->getRepository(Email::class);
+        $criteria = [
+            'id > ?' => $last
+        ];
+
+        $emails = array_map(function($email) {
+            return $this->renderView('partials/email-row.html.twig', ['email' => $email]);
+        }, $repository->allOrderedDateDesc($criteria));
+
+        return new Response(join('', $emails));
     }
 }

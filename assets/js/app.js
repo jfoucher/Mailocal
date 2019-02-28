@@ -13,7 +13,7 @@ require('../scss/app.scss');
     });
 
     //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function () {
+    $('body').on('click', ".checkbox-toggle", function () {
       const clicks = $(this).data('clicks');
       if (clicks) {
         //Uncheck all checkboxes
@@ -106,7 +106,6 @@ require('../scss/app.scss');
           footer.append($item.clone());
         });
       }
-
     })
       .on('click', '.email-close', (ev) => {
         $('.email-display').removeClass('col-md-8').css('display', 'none');
@@ -116,7 +115,20 @@ require('../scss/app.scss');
         const footer = $('.email-display .box-footer');
         footer.html('');
         footer.hide();
-    })
+    });
+
+    setInterval(() => {
+      const lastEmailId = $('.mailbox-messages table tbody > tr').first().data('id');
+      $.get('emails/new/' + lastEmailId).then((res) => {
+        console.log(res);
+        $('.mailbox-messages table tbody').prepend(res);
+        $('.mailbox-messages input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        });
+
+      })
+    }, 10000)
   });
 
 })(jQuery);

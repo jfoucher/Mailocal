@@ -76,8 +76,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/{email}", name="home")
      * @param null|mixed $email
+     * @return Response
      */
-    public function index(Request $request, $email = null)
+    public function index($email = null)
     {
         /**
          * @var EmailRepository $repository
@@ -85,7 +86,7 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $criteria = [];
         if ($email) {
-            $criteria['to'] = $email;
+            $criteria['to = ?'] = $email;
         }
         //$s = $request->query->get('s');
 

@@ -35,11 +35,20 @@ class EmailRepository extends ServiceEntityRepository
 
     public function allOrderedDateDesc($criteria = [])
     {
-        $criteria['deletedAt'] = null;
-        return $this->findBy($criteria, [
-            'created_at' => 'DESC',
-            'to' => 'ASC',
-        ]);
+        $qb = $this->createQueryBuilder('e');
+        $i = 1;
+        foreach ($criteria as $k => $v) {
+            if (strpos($k, 'e.') !== 0) {
+                //Make sure start with table name
+                $k = 'e.'.$k;
+            }
+            $qb->andWhere($k.$i);
+            $qb->setParameter($i, $v);
+            $i++;
+        }
+        $qb->orderBy('e.id', 'DESC');
+        $qb->andWhere('e.deletedAt IS NULL');
+        return $qb->getQuery()->getResult();
     }
 
     public function getRecipients()

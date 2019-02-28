@@ -4,7 +4,16 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('builds/app.css') }}">
 {% endblock %}
-
+{% block footer %}
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            <a href="https://mailocal.jfoucher.com">Documentation</a>
+        </div>
+        <!-- Default to the left -->
+        Copyright &copy; 2019 <strong><a href="https://jfoucher.com">Jonathan Foucher</a>.</strong> All rights reserved.
+    </footer>
+{% endblock %}
 {% block javascripts %}
     <script src="{{ asset('builds/app.js') }}"></script>
 {% endblock %}
