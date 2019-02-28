@@ -19,7 +19,7 @@ images:
 ### Requirements
 - [php](https://php.net)
 - [git](https://git-scm.com/downloads)
-- [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/)
+- [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org)
 
 ### Install
