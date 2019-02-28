@@ -25,6 +25,10 @@ However you can see all of them by simply opening the provided interface in any 
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
+- That's it
+
+## Running
+
 - Run `yarn run start` to build and run everything
 
 Alternatively you can:
@@ -46,6 +50,10 @@ Alternatively you can:
 You can now view any emails you receive by opening http://localhost:8000 in your browser
 
 The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`
+
+##License
+
+This project is licensed under the MIT License - see the [LICENSE.md] file for details
   
 ## Warning
 
