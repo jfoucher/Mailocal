@@ -10,5 +10,5 @@ install:
   - sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 script:
-  - vendor/bin/phpunit --verbose || travis_terminate 1
+  - vendor/bin/simple-phpunit --verbose || travis_terminate 1
   - php-cs-fixer --diff --dry-run --stop-on-violation --verbose fix -v
