@@ -42,7 +42,14 @@ class PostfixReceiveCommand extends Command
     protected $logger;
     protected $dispatcher;
 
-    public function __construct($name, LoggerInterface $logger, EventDispatcherInterface $dispatcher)
+    /**
+     * PostfixReceiveCommand constructor.
+     *
+     * @param string|null $name
+     * @param LoggerInterface $logger
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function __construct(string $name = null, LoggerInterface $logger, EventDispatcherInterface $dispatcher)
     {
         parent::__construct($name);
         $this->logger = $logger;
