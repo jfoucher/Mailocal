@@ -4,3 +4,4 @@ vendor
 var
 public
 .env
+node_modules/

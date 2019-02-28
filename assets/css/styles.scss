@@ -5,7 +5,7 @@
 @charset "utf-8";
 
 body {
-    font-family: "Helvetica Neue", Geneva, sans-serif;
+    font-family: "Helvetica Neue", "Segoe UI", sans-serif;
     margin: 0;
     padding:0;
     box-sizing: border-box;
@@ -62,7 +62,7 @@ a.dark:visited {
         font-weight: 200;
     }
     .cta {
-        margin-top: 3em;
+        margin: 3em 0 2em 0;
         a {
             border-radius: 2px;
             font-weight: 400;
