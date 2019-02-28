@@ -1,9 +1,9 @@
- <img src="favicon.png" align="right">
- 
- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
- ![Build status](https://img.shields.io/travis/jfoucher/Mailocal.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Build status](https://img.shields.io/travis/jfoucher/Mailocal.svg)
  
 # Mailocal
+
+ <img src="favicon.png" align="right">
 
 Safely test sending your emails by using this local SMTP server and viewing the results on the web interface.
 
