@@ -15,7 +15,7 @@ However you can see all of them by simply opening the provided interface in any 
 
 
 ## Requirements
-- [php](https://php.net)
+- [php 7.2](https://php.net)
 - [git](https://git-scm.com/downloads)
 - [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org)
