@@ -24,6 +24,7 @@ return PhpCsFixer\Config::create()
         'no_useless_return' => true,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_order' => true,
+        'no_unreachable_default_argument_value' => false,
         'semicolon_after_instruction' => true,
         'whitespace_after_comma_in_array' => true,
         'header_comment' => ['header' => $header],
