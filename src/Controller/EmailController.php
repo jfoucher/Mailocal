@@ -87,7 +87,7 @@ class EmailController extends AbstractController
             'id > ?' => $last
         ];
 
-        $emails = array_map(function($email) {
+        $emails = array_map(function ($email) {
             return $this->renderView('partials/email-row.html.twig', ['email' => $email]);
         }, $repository->allOrderedDateDesc($criteria));
 
