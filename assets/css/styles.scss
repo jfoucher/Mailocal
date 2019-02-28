@@ -6,6 +6,7 @@
 
 body {
     font-family: "Helvetica Neue", "Segoe UI", sans-serif;
+    
     margin: 0;
     padding:0;
     box-sizing: border-box;
@@ -60,6 +61,7 @@ a.dark:visited {
     }
     p {
         font-weight: 200;
+        font-size: 1.2em;
     }
     .cta {
         margin: 3em 0 2em 0;
@@ -110,6 +112,8 @@ a.dark:visited {
 }
 
 .content {
+    font-weight: 300;
+    font-size: 1.1em;
     padding: 2em 0;
     line-height: 1.4em;
     h2 {
