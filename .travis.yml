@@ -3,4 +3,12 @@ php:
   - '7.2'
   - '7.3'
 
-install: composer install
+install:
+  - composer install
+  - curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer
+  - sudo chmod a+x php-cs-fixer
+  - sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+script:
+  - vendor/bin/phpunit --verbose || travis_terminate 1
+  - php-cs-fixer --diff --dry-run --stop-on-violation --verbose fix -v

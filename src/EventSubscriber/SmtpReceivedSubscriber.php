@@ -1,12 +1,21 @@
 <?php
-/**
- * SmtpReceivedSubscriber.php
+
+/*
+ * This file is part of the Maillocal package.
  *
- * Created By: jonathan
- * Date: 20/02/2019
- * Time: 19:52
+ * Copyright 2019 Jonathan Foucher
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @package Mailocal
  */
+
 namespace App\EventSubscriber;
+
 use App\Email\InvalidAttachmentException;
 use App\Email\Parser;
 use App\Entity\Email;
@@ -59,7 +68,7 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $email->setText($message->getTextBody());
         $attachments = [];
         if (is_array($message->getAttachments()) && count($message->getAttachments()) > 0) {
-            $attachments = array_map(function($item){
+            $attachments = array_map(function ($item) {
                 /**
                  * @var Attachment $item
                  */
@@ -75,7 +84,7 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $email->setSubject(mb_decode_mimeheader($message->getSubject()));
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());
-        $to = $message->getTo()->map(function($item) {
+        $to = $message->getTo()->map(function ($item) {
             return $item->getAddress();
         })->toArray();
         $email->setTo(join(', ', $to));
@@ -84,16 +93,18 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
             $this->em->persist($email);
             $this->em->flush();
             $this->logger->info('Email saved');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->logger->error('Email NOT saved');
         }
     }
 
-    public function processAuthFailed(AuthFailedEvent $event) {
+    public function processAuthFailed(AuthFailedEvent $event)
+    {
         $this->logger->error('Auth failed for user '.$event->username. ' with password '.$event->password);
     }
 
-    protected function mapTypes($mimeType) {
+    protected function mapTypes($mimeType)
+    {
         $map = [
             'application/vnd.ms-excel' => 'excel',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'excel',

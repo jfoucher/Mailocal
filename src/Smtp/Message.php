@@ -1,59 +1,74 @@
 <?php
 
+/*
+ * This file is part of the Maillocal package.
+ *
+ * Copyright 2019 Jonathan Foucher
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @package Mailocal
+ */
+
 namespace App\Smtp;
 
 /**
  * SMTP Message container.
  */
-class Message {
+class Message
+{
 
   /**
    * Get an instance of Message.
    */
-  public function __construct() {
-    $this->delivered = FALSE;
-  }
+    public function __construct()
+    {
+        $this->delivered = false;
+    }
 
-  /**
-   * Username.
-   *
-   * @var string | null | boolean | string[]
-   */
-  public $username;
+    /**
+     * Username.
+     *
+     * @var string | null | boolean | string[]
+     */
+    public $username;
 
-  /**
-   * Summary of $password.
-   *
-   * @var mixed
-   */
-  public $password;
+    /**
+     * Summary of $password.
+     *
+     * @var mixed
+     */
+    public $password;
 
-  /**
-   * To addresses.
-   *
-   * @var string[]
-   */
-  public $to;
+    /**
+     * To addresses.
+     *
+     * @var string[]
+     */
+    public $to;
 
-  /**
-   * From addresses.
-   *
-   * @var string[]
-   */
-  public $from;
+    /**
+     * From addresses.
+     *
+     * @var string[]
+     */
+    public $from;
 
-  /**
-   * Message data.
-   *
-   * @var string
-   */
-  public $data;
+    /**
+     * Message data.
+     *
+     * @var string
+     */
+    public $data;
 
-  /**
-   * If the message has been or not succesfully delivered.
-   *
-   * @var bool
-   */
-  public $delivered;
-
+    /**
+     * If the message has been or not succesfully delivered.
+     *
+     * @var bool
+     */
+    public $delivered;
 }
