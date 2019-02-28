@@ -30,11 +30,7 @@ images:
 
 ### Running
 
-<img src="assets/img/console.png" alt="drawing" width="200" align="center" />
-
-{:refdef: style="text-align: center;"}
-![Running Mailocal](assets/img/console.png)
-{: refdef}
+<img src="assets/img/console.png" alt="drawing" width="782" align="center" />
 
 - Run `yarn run start` to build and run everything
 
