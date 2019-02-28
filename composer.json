@@ -1,6 +1,8 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
+    "name": "jfoucher/mailocal",
+    "description": "Debug your emails while making sure real customers never see them.",
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
