@@ -44,6 +44,7 @@ Alternatively you can:
 - [Mailocal](/) uses an SQLite database by default (in `var/data.db`) but you can choose to use any other database by setting the correct URL in the `.env` file
  
 ### Done
+
 You can now view any emails you receive by opening http://localhost:8000 in your browser
 
 The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`
