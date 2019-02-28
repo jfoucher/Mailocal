@@ -22,7 +22,7 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production",
-    "start": "encore production && (bin/console server:run | php bin/console email:server)"
+    "start": "encore production && (php bin/console server:run | php bin/console email:server)"
   },
   "dependencies": {}
 }
