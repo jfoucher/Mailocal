@@ -39,7 +39,7 @@ class SmtpServerCommand extends Command
     protected static $defaultName = 'email:server';
     protected $server;
 
-    public function __construct(?string $name = null, CustomServer $server)
+    public function __construct(?string $name, CustomServer $server)
     {
         parent::__construct($name);
         $this->server = $server;
