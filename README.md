@@ -33,6 +33,8 @@ However you can see all of them by simply opening the provided interface in any 
 
 ## Running
 
+<img src="console.png" align="center" width="782">
+
 - Run `yarn run start` to build and run everything
 
 Alternatively you can:
