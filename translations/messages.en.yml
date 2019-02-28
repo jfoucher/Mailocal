@@ -1,4 +1,7 @@
 recipients: Recipients
+recipient: Recipient
+inbox: Inbox
+subject: Subject
 all_recipients: All recipients
 index_title: Mailocal - Local SMTP server and email display
 index_page_title: Local emails
