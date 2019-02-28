@@ -1,4 +1,5 @@
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ ![Build status](https://img.shields.io/travis/jfoucher/Mailocal.svg)
  
 # Mailocal
 
