@@ -3,7 +3,7 @@
  
 # Mailocal
 
- <img src="favicon.png" align="right">
+ <img src="favicon.png" align="right" width="80">
 
 Safely test sending your emails by using this local SMTP server and viewing the results on the web interface.
 
