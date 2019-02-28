@@ -27,6 +27,11 @@ images:
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
+
+### Running
+
+<img src="assets/img/console.png" width="782" align="center>
+
 - Run `yarn run start` to build and run everything
 
 Alternatively you can:

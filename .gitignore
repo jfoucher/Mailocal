@@ -5,3 +5,4 @@ var
 public
 .env
 node_modules/
+bin/
