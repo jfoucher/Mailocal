@@ -1,3 +1,5 @@
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ 
 # Mailocal
 
 Safely test sending your emails by using this local SMTP server and viewing the results on the web interface.

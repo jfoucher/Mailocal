@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Email;
-use App\Repository\EmailRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +20,9 @@ class EmailController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $em = $this->getDoctrine()->getManager();
         $email = $repository->find((int)$id);
+        /**
+         * @var Email $email
+         */
         $email->setDeletedAt(new \DateTime());
         $em->persist($email);
         $em->flush();
@@ -40,6 +42,9 @@ class EmailController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $em = $this->getDoctrine()->getManager();
         $email = $repository->find((int)$id);
+        /**
+         * @var Email $email
+         */
         $email->setReadAt(new \DateTime());
         $em->persist($email);
         $em->flush();

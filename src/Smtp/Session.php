@@ -26,7 +26,7 @@ abstract class Session implements SessionInterface {
   /**
    * Timer to enforce a maximum session duration.
    *
-   * @var \React\EventLoop\Timer\Timer
+   * @var \React\EventLoop\TimerInterface | null
    */
   protected $timer;
 
@@ -40,7 +40,7 @@ abstract class Session implements SessionInterface {
   /**
    * React connection.
    *
-   * @var \React\Socket\ConnectionInterface
+   * @var \React\Socket\ConnectionInterface | null
    */
   protected $socket;
 
@@ -54,7 +54,7 @@ abstract class Session implements SessionInterface {
   /**
    * Summary of $callback.
    *
-   * @var callable
+   * @var callable|null
    */
   protected  $callback;
 
@@ -82,9 +82,12 @@ abstract class Session implements SessionInterface {
   /**
    * Incoming DATA command data.
    *
-   * @var string
+   * @var string | null
    */
   protected $data;
+
+  protected $from;
+  protected $to;
 
   /**
    * Initialize al internal buffers and behaviours.
@@ -386,7 +389,7 @@ abstract class Session implements SessionInterface {
    *   Command argument.
    */
   protected function authPlainReceived(string $arg) {
-    $arg = base64_decode($arg);
+    $arg = (string)base64_decode($arg);
     // For this to be valid the null character needs to be there at least twice.
     if (substr_count($arg, chr(0)) !== 2) {
       $this->socketWriteLine($this->settings->smtp535);

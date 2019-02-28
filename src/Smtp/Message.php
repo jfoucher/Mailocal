@@ -17,7 +17,7 @@ class Message {
   /**
    * Username.
    *
-   * @var string
+   * @var string | null | boolean | string[]
    */
   public $username;
 

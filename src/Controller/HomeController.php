@@ -69,10 +69,8 @@ class HomeController extends AbstractController
         if ($email) {
             $criteria['to'] = $email;
         }
-        $s = $request->query->get('s');
-        if ($s) {
-            $criteria[''];
-        }
+        //$s = $request->query->get('s');
+
         $emails = $repository->allOrderedDateDesc($criteria);
 
         return $this->render('home/index.html.twig', [
