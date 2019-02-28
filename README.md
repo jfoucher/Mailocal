@@ -6,13 +6,13 @@ By using this locally installed SMTP server you can be sure that your real custo
 
 However you can see all of them by simply opening the provided interface in any browser.
 
-# Requirements
-- [git](https://git-scm.com/downloads)
+## Requirements
 - [php](https://php.net)
+- [git](https://git-scm.com/downloads)
 - [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org)
 
-# Installation
+## Install
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
@@ -24,19 +24,20 @@ Alternatively you can:
 - `php bin/console email:server` to launch the SMTP server
 - `php bin/console server:start` to start Symfony's built-in webserver
 
-# Configuration
+## Configuration
 
 - Configure your other apps to use this new local SMTP server : 
   - host : `127.0.0.1`
   - port: `2525` (or the one you chose, see below)
   - You can configure an SMTP username and password by setting the `SMTP_SERVER_USER` and `SMTP_SERVER_PASSWORD`
- fields in you .env.local file. Make sure you update your email client's credentials accordingly.
+ fields in you `.env` file. Make sure you update your email client's credentials accordingly.
+ - [Mailocal](/) uses an SQLite database by default (in `var/data.db`) but you can choose to use any other database by setting the correct URL in the `.env` file
  
-# Done
+## Done
 You can now view any emails you receive by opening http://localhost:8000 in your browser
 
 The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`
   
-# Warning
+## Warning
 
 Never use this in production, only run it on your local machine.
