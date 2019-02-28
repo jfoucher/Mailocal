@@ -6,6 +6,12 @@ By using this locally installed SMTP server you can be sure that your real custo
 
 However you can see all of them by simply opening the provided interface in any browser.
 
+## Screenshots
+
+![All messages](https://mailocal.jfoucher.com/assets/img/img1.png "List of messages, can be filtered by recipient")
+![single message](https://mailocal.jfoucher.com/assets/img/img2.png "Viewing a single message")
+
+
 ## Requirements
 - [php](https://php.net)
 - [git](https://git-scm.com/downloads)
