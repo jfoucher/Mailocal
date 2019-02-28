@@ -39,9 +39,9 @@ Alternatively you can:
 - Configure your other apps to use this new local SMTP server : 
   - host : `127.0.0.1`
   - port: `2525` (or the one you chose, see below)
-  - You can configure an SMTP username and password by setting the `SMTP_SERVER_USER` and `SMTP_SERVER_PASSWORD`
+- You can configure an SMTP username and password by setting the `SMTP_SERVER_USER` and `SMTP_SERVER_PASSWORD`
  fields in your `.env` file. Make sure you update your email client's credentials accordingly.
- - [Mailocal](/) uses an SQLite database by default (in `var/data.db`) but you can choose to use any other database by setting the correct URL in the `.env` file
+- [Mailocal](/) uses an SQLite database by default (in `var/data.db`) but you can choose to use any other database by setting the correct URL in the `.env` file
  
 ### Done
 You can now view any emails you receive by opening http://localhost:8000 in your browser
