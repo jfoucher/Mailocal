@@ -8,16 +8,14 @@ However you can see all of them by simply opening the provided interface in any 
 
 # Requirements
 - [git](https://git-scm.com/downloads)
-- [yarn](https://yarnpkg.com) or [npm](https://www.npmjs.com/)
+- [php](https://php.net)
+- [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org)
 
 # Installation
 
 - `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
 - `composer install`
-- Copy `.env.example` to `.env` and set your database connection parameters.
-- Run `php bin/console doctrine:database:create` to create the database
-- Run `php bin/console doctrine:migrations:migrate` to create the database schema
 - Run `yarn run start` to build and run everything
 
 Alternatively you can:

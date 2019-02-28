@@ -67,7 +67,13 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@php -r \"copy('.env.example', '.env');\"",
+            "@auto-scripts",
+            "yarn install",
+            "@php bin/console doctrine:database:create",
+            "@php bin/console doctrine:schema:update --force",
+            "echo 'Everything is now installed'",
+            "echo 'Now run \"yarn run start\" to start the SMTP server and the web interface'"
         ],
         "post-update-cmd": [
             "@auto-scripts"
