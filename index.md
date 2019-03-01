@@ -18,25 +18,31 @@ images:
 
 ### Requirements
 
-- [php](https://php.net)
-- [git](https://git-scm.com/downloads)
-- [yarn](https://yarnpkg.com)
+- [php 7.2](https://php.net)
 - [composer](https://getcomposer.org)
+
+If you don't have Composer yet, download it following the instructions on [http://getcomposer.org/](http://getcomposer.org/) or just run the following command:
+
+    curl -s http://getcomposer.org/installer | php
+
 
 ### Install
 
-- `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
-- `composer install`
+- `composer create-project jfoucher/mailocal`
+- Done!
 
 ### Running
 
 <img src="assets/img/console.png" alt="drawing" width="782" align="center" />
 
-- Run `yarn run start` to build and run everything
+
+- `cd mailocal` to enter the directory just created by composer
+- Run `bin/mailocal to run both the SMTP server and the web server
+
 
 Alternatively you can:
 
-- Run `yarn run build` to build the frontend assets
+- Run `yarn run build` to build the frontend assets (they are included in the distribution but maybe you want to change the look of the web interface)
 - `php bin/console email:server` to launch the SMTP server
 - `php bin/console server:start` to start Symfony's built-in webserver
 
@@ -49,6 +55,7 @@ Alternatively you can:
 - You can configure an SMTP username and password by setting the `SMTP_SERVER_USER` and `SMTP_SERVER_PASSWORD`
  fields in your `.env` file. Make sure you update your email client's credentials accordingly.
 - [Mailocal](/) uses an SQLite database by default (in `var/data.db`) but you can choose to use any other database by setting the correct URL in the `.env` file
+- The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`. You can also set the `SMTP_SERVER_PORT` variable in the `.env` file (this is useful if you run `bin/mailocal` directly).
  
 ### Done
 
