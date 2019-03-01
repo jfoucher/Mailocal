@@ -73,11 +73,10 @@
         "post-install-cmd": [
             "@php -r \"copy('.env.example', '.env');\"",
             "@auto-scripts",
-            "yarn install",
             "@php bin/console doctrine:database:create",
             "@php bin/console doctrine:schema:update --force",
-            "echo 'Everything is now installed'",
-            "echo 'Now run \"yarn run start\" to start the SMTP server and the web interface'"
+            "echo '<info>Everything is now installed</info>'",
+            "echo '<info>Now run \"cd maillocal && bin/mailocal\" to start the SMTP server and the web interface</info>'"
         ],
         "post-update-cmd": [
             "@auto-scripts"
