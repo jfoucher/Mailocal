@@ -3,10 +3,11 @@
 if (is_file(__DIR__.'/../vendor/autoload.php')) {
     // Installed locally
     require __DIR__.'/../vendor/autoload.php';
-}
-if (is_file(__DIR__.'/../autoload.php')) {
+}else if (is_file(__DIR__.'/../autoload.php')) {
     // Installed globally
-    require __DIR__.'/../autoload.php';
+    require __DIR__.'/../../../autoload.php';
+} else {
+    throw new \Exception('Could not find composer autoload file. Current directory is '.__DIR__);
 }
 
 use Symfony\Component\Process\Process;
