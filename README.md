@@ -22,14 +22,15 @@ However you can see all of them by simply opening the provided interface in any 
 
 ## Install
 
-- `composer require -g jfoucher/mailocal`
+- `composer create-project jfoucher/mailocal`
 - That's it
 
 ## Running
 
 <img src="console.png" align="center" width="782">
 
-- Run `mailocal` to run both the SMTP server and the web server
+- `cd mailocal` to enter the directory just created by composer
+- Run `bin/mailocal` to run both the SMTP server and the web server
 
 Alternatively you can:
 
