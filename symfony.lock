@@ -98,6 +98,9 @@
     "jean85/pretty-package-versions": {
         "version": "1.2"
     },
+    "jfoucher/email-parser": {
+        "version": "0.3.2"
+    },
     "kevinpapst/adminlte-bundle": {
         "version": "0.9",
         "recipe": {
@@ -106,9 +109,6 @@
             "version": "0.9",
             "ref": "dca6a91efc23d844326d2e90b47bdf48a5038fcf"
         }
-    },
-    "michaelesmith/email-parser": {
-        "version": "dev-master"
     },
     "monolog/monolog": {
         "version": "1.24.0"
