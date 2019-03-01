@@ -60,8 +60,6 @@ Alternatively you can:
 ### Done
 
 You can now view any emails you receive by opening http://localhost:8000 in your browser
-
-The SMTP runs on port 2525 by default. Pass the `--port` option to use another one, like this: `php bin/console email:server --port=587`
   
 ### Warning
 
