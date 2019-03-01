@@ -20,6 +20,11 @@ However you can see all of them by simply opening the provided interface in any 
 - [php 7.2](https://php.net)
 - [composer](https://getcomposer.org)
 
+If you don't have Composer yet, download it following the instructions on
+[http://getcomposer.org/](http://getcomposer.org/) or just run the following command:
+
+    curl -s http://getcomposer.org/installer | php
+
 ## Install
 
 - `composer create-project jfoucher/mailocal`
