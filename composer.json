@@ -76,7 +76,7 @@
             "@php bin/console doctrine:database:create",
             "@php bin/console doctrine:schema:update --force",
             "echo '<info>Everything is now installed</info>'",
-            "echo '<info>Now run \"cd maillocal && bin/mailocal\" to start the SMTP server and the web interface</info>'"
+            "echo '<info>Now run \"cd mailocal && bin/mailocal\" to start the SMTP server and the web interface</info>'"
         ],
         "post-update-cmd": [
             "@auto-scripts"
