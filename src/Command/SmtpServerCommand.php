@@ -33,6 +33,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use App\Email\Parser;
 use App\Smtp\CustomServer;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class SmtpServerCommand extends Command
 {
@@ -55,7 +56,7 @@ class SmtpServerCommand extends Command
             'p',
             InputOption::VALUE_OPTIONAL,
             'Which port should the SMTP server run on?',
-            2525
+            getenv('SMTP_SERVER_PORT')
         );
     }
 
@@ -64,8 +65,9 @@ class SmtpServerCommand extends Command
         $this->server->setPort($input->getOption('port'));
         $this->server->create();
 
+        $io = new SymfonyStyle($input, $output);
+        $io->success('SMTP server now listening for messages on port '.$this->server->getPort());
 
-        $output->writeln('<info>SMTP server now listening for messages on port '.$this->server->getPort().'</info>');
         $this->server->getServer()->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($output) {
             $parser = new Parser();
             try {

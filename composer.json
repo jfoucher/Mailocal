@@ -3,6 +3,7 @@
     "license": "MIT",
     "name": "jfoucher/mailocal",
     "description": "Debug your emails while making sure real customers never see them.",
+    "bin": ["bin/mailocal"],
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",

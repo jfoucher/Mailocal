@@ -5,8 +5,6 @@
 
 # Mailocal
 
-
-
 Safely test sending your emails by using this local SMTP server and viewing the results on the web interface.
 
 By using this locally installed SMTP server you can be sure that your real customers will never see your test emails !
@@ -18,24 +16,20 @@ However you can see all of them by simply opening the provided interface in any 
 ![All messages](https://mailocal.jfoucher.com/assets/img/img1.png "List of messages, can be filtered by recipient")
 ![single message](https://mailocal.jfoucher.com/assets/img/img2.png "Viewing a single message")
 
-
 ## Requirements
 - [php 7.2](https://php.net)
-- [git](https://git-scm.com/downloads)
-- [yarn](https://yarnpkg.com)
 - [composer](https://getcomposer.org)
 
 ## Install
 
-- `git clone git@github.com:jfoucher/mailocal.git && cd mailocal`
-- `composer install`
+- `composer require -g jfoucher/mailocal`
 - That's it
 
 ## Running
 
 <img src="console.png" align="center" width="782">
 
-- Run `yarn run start` to build and run everything
+- Run `mailocal` to run both the SMTP server and the web server
 
 Alternatively you can:
 
