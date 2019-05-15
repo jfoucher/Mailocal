@@ -18,6 +18,11 @@ However you can see all of them by simply opening the provided interface in any 
 
 ## Requirements
 - [php 7.2](https://php.net)
+- ext-curl (php7.2-curl)
+- ext-mbstring (php7.2-mbstring)
+- ext-sqlite3 (php7.2-sqlite3)
+- ext-xml (php7.2-xml)
+- ext-zip (php7.2-zip)
 - [composer](https://getcomposer.org)
 
 If you don't have Composer yet, download it following the instructions on
