@@ -13,7 +13,7 @@ if (is_file(__DIR__.'/../vendor/autoload.php')) {
 use Symfony\Component\Process\Process;
 
 $web = new Process(['php', __DIR__.'/console', 'server:run'], null, null, null, 0);
-$web->setTty(true);
+$web->setTty(Process::isTtySupported());
 $web->start(function ($type, $buffer) {
     if (Process::ERR === $type) {
         echo 'WEB ERROR   > '.$buffer;
@@ -23,7 +23,7 @@ $web->start(function ($type, $buffer) {
 });
 
 $mail = new Process(['php', __DIR__.'/console', 'email:server'], null, null, null, 0);
-$mail->setTty(true);
+$mail->setTty(Process::isTtySupported());
 $mail->start(function ($type, $buffer) {
     if (Process::ERR === $type) {
         echo 'EMAIL ERROR > '.$buffer;
