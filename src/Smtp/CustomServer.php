@@ -25,6 +25,7 @@ class CustomServer
     protected $logger;
     protected $dispatcher;
     protected $port;
+    protected $allowedHost;
     protected $server;
     protected $loop;
 
@@ -40,7 +41,10 @@ class CustomServer
         if (!$this->port) {
             $this->port = 54321;
         }
-        $this->server = new ServerSymfony('127.0.0.1', $this->port, $this->logger, $this->loop, CustomSession::class, $this->dispatcher);
+        if (!$this->allowedHost) {
+            $this->allowedHost = '127.0.0.1';
+        }
+        $this->server = new ServerSymfony($this->allowedHost, $this->port, $this->logger, $this->loop, CustomSession::class, $this->dispatcher);
     }
 
     public function start()
@@ -71,5 +75,18 @@ class CustomServer
     public function getPort()
     {
         return $this->port;
+    }
+
+    public function setAllowedHosts($hosts)
+    {
+        if ($this->server) {
+            throw new InvalidArgumentException('The server has already been created, your port change will not be tken into account');
+        }
+        $this->allowedHost = $hosts;
+        return $this;
+    }
+    public function getAllowedHosts()
+    {
+        return $this->allowedHost;
     }
 }

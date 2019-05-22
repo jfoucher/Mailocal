@@ -57,16 +57,25 @@ class SmtpServerCommand extends Command
             InputOption::VALUE_OPTIONAL,
             'Which port should the SMTP server run on?',
             getenv('SMTP_SERVER_PORT')
+        )
+
+        ->addOption(
+            'allowed_hosts',
+            'ah',
+            InputOption::VALUE_OPTIONAL,
+            'Which ip addresses should be allowed to connect to this server?',
+            getenv('SMTP_SERVER_ALLOWED_HOSTS')
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->server->setPort($input->getOption('port'));
+        $this->server->setAllowedHosts($input->getOption('allowed_hosts'));
         $this->server->create();
 
         $io = new SymfonyStyle($input, $output);
-        $io->success('SMTP server now listening for messages on port '.$this->server->getPort());
+        $io->success('SMTP server now listening for messages from '.$this->server->getAllowedHosts().' on port '.$this->server->getPort());
 
         $this->server->getServer()->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($output) {
             $parser = new Parser();
