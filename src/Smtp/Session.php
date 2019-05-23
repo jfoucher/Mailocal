@@ -249,53 +249,54 @@ abstract class Session implements SessionInterface
     protected function dispatch(string $cmd, string $arg)
     {
         $this->log->info("C: {$cmd} " . mb_strimwidth($arg, 0, 50, "..."));
+        $cmd = strtoupper($cmd);
         switch ($cmd) {
-      case 'HELO':
-        $this->heloCommand($arg);
-        break;
+          case 'HELO':
+            $this->heloCommand($arg);
+            break;
 
-      case 'EHLO':
-        $this->ehloCommand($arg);
-        break;
+          case 'EHLO':
+            $this->ehloCommand($arg);
+            break;
 
-      case 'AUTH':
-        $this->authCommand($arg);
-        break;
+          case 'AUTH':
+            $this->authCommand($arg);
+            break;
 
-      case 'MAIL':
-        $this->mailCommand($arg);
-        break;
+          case 'MAIL':
+            $this->mailCommand($arg);
+            break;
 
-      case 'RCPT':
-        $this->rcptCommand($arg);
-        break;
+          case 'RCPT':
+            $this->rcptCommand($arg);
+            break;
 
-      case 'DATA':
-        // Data command might take longer
-        // with big attachments and the such.
-        $this->resetTimer(20);
-        $this->dataCommand($arg);
-        break;
+          case 'DATA':
+            // Data command might take longer
+            // with big attachments and the such.
+            $this->resetTimer(20);
+            $this->dataCommand($arg);
+            break;
 
-      case 'RSET':
-        $this->rsetCommand($arg);
-        break;
+          case 'RSET':
+            $this->rsetCommand($arg);
+            break;
 
-      case 'HELP':
-        $this->helpCommand($arg);
-        break;
+          case 'HELP':
+            $this->helpCommand($arg);
+            break;
 
-      case 'QUIT':
-        $this->quitCommand($arg);
-        break;
+          case 'QUIT':
+            $this->quitCommand($arg);
+            break;
 
-      case 'NOOP':
-        $this->noopCommand($arg);
-        break;
+          case 'NOOP':
+            $this->noopCommand($arg);
+            break;
 
-      default:
-        $this->notImplemented();
-    }
+          default:
+            $this->notImplemented();
+        }
     }
 
     /**
