@@ -17,7 +17,7 @@ However you can see all of them by simply opening the provided interface in any 
 ![single message](https://mailocal.jfoucher.com/assets/img/img2.png "Viewing a single message")
 
 ## Requirements
-- [php 7.2](https://php.net)
+- [php 7.3](https://php.net)
 - ext-curl (php7.2-curl)
 - ext-mbstring (php7.2-mbstring)
 - ext-sqlite3 (php7.2-sqlite3)

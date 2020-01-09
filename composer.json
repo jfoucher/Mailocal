@@ -5,7 +5,7 @@
     "description": "Debug your emails while making sure real customers never see them.",
     "bin": ["bin/mailocal", "bin/console"],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "html2text/html2text": "^4.2",
