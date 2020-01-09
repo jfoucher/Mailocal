@@ -1,5 +1,9 @@
 #!/usr/bin/env php
 <?php
+
+use Symfony\Component\Process\Process;
+use Symfony\Component\Dotenv\Dotenv;
+
 if (is_file(__DIR__.'/../vendor/autoload.php')) {
     // Installed locally
     require __DIR__.'/../vendor/autoload.php';
@@ -10,9 +14,18 @@ if (is_file(__DIR__.'/../vendor/autoload.php')) {
     throw new \Exception('Could not find composer autoload file. Current directory is '.__DIR__);
 }
 
-use Symfony\Component\Process\Process;
+$dotEnvFilename = \dirname(__DIR__) . '/.env';
+$envVars = (new Dotenv())->parse(\file_get_contents($dotEnvFilename), $dotEnvFilename);
 
-$web = new Process(['php', __DIR__.'/console', 'server:run'], null, null, null, 0);
+$webServerAddressPort = $envVars['WEB_SERVER_ADDRESSPORT'] ?? null;
+
+$runWebServerCmdParts = ['php', __DIR__.'/console', 'server:run'];
+
+if (\strlen($webServerAddressPort)) {
+    $runWebServerCmdParts[] = $webServerAddressPort;
+}
+
+$web = new Process($runWebServerCmdParts, null, null, null, 0);
 $web->setTty(Process::isTtySupported());
 $web->start(function ($type, $buffer) {
     if (Process::ERR === $type) {
