@@ -33,7 +33,7 @@ require('../scss/app.scss');
         const $item = $(item);
         $.ajax({
           url: $item.data('link'),
-          method: 'delete'
+          method: 'get'
         }).then((res) => {
           $item.parents('tr').remove();
         })
@@ -48,7 +48,7 @@ require('../scss/app.scss');
         if (!curTr.hasClass('read')) {
           $.ajax({
             url: $item.parents('tr').data('markread'),
-            method: 'put'
+            method: 'get'
           }).then((res) => {
             $item.parents('tr').addClass('read');
           })
@@ -69,7 +69,7 @@ require('../scss/app.scss');
         to = setTimeout(() => {
           $.ajax({
             url: tr.data('markread'),
-            method: 'put'
+            method: 'get'
           }).then((res) => {
             tr.addClass('read');
           });

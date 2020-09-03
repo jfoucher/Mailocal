@@ -29,7 +29,7 @@ class EmailController extends AbstractController
 {
     /**
      * @param int $id
-     * @Route("/emails/{id}", name="deleteEmail", methods={"DELETE"})
+     * @Route("/emails/delete/{id}", name="deleteEmail", methods={"GET"})
      * @return Response
      */
     public function delete($id)
@@ -51,7 +51,7 @@ class EmailController extends AbstractController
     }
     /**
      * @param int $id
-     * @Route("/emails/markRead/{id}", name="markRead", methods={"PUT"})
+     * @Route("/emails/markRead/{id}", name="markRead", methods={"GET"})
      * @return Response
      */
     public function markRead($id)

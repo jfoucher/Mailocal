@@ -107,6 +107,15 @@
             "ref": "dca6a91efc23d844326d2e90b47bdf48a5038fcf"
         }
     },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.2.1"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -490,6 +499,9 @@
     },
     "twig/twig": {
         "version": "v2.6.2"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.4.0"
