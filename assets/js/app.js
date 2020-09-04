@@ -92,7 +92,7 @@ require('../scss/app.scss');
       if (text.replace(/\s/g,'').length > 0) {
         $('#text-content').html('<div class="email-text-content"><p>'+text.replace(/\n/gi, "<br>\n")+'</p></div>');
       } else {
-        $('#text-content').html('<div class="no-content"><p>Aucun contenu texte pour cet email</p></div>');
+        $('#text-content').html('<div class="no-content"><p>No text content for this email</p></div>');
       }
       $('#raw-content').html('<div class="email-text-content"><p>'+tr.find('script.raw-email').html().replace(/\n/gi, "<br>\n")+'</p></div>');
 
