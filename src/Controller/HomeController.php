@@ -96,6 +96,7 @@ class HomeController extends AbstractController
             'emails' => $emails,
             'total' => $repository->count(['deletedAt' => null]),
             'recipients' => $repository->getRecipients(),
+            'hide_footer' => (bool)getenv('HIDE_FOOTER'),
         ]);
     }
 }
