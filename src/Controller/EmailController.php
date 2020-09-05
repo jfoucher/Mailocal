@@ -36,18 +36,24 @@ class EmailController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $em = $this->getDoctrine()->getManager();
-        $email = $repository->find((int)$id);
-        /**
-         * @var Email $email
-         */
-        $email->setDeletedAt(new \DateTime());
-        $em->persist($email);
-        $em->flush();
+        if($email = $repository->find((int)$id)) {
+            /**
+             * @var Email $email
+             */
+            $email->setDeletedAt(new \DateTime());
+            $em->persist($email);
+            $em->flush();
+
+            return new JsonResponse([
+                'status' => 'ok',
+                'message' => 'email deleted',
+            ], 200);
+        }
 
         return new JsonResponse([
-            'status' => 'ok',
-            'message' => 'email deleted',
-        ], 200);
+            'status' => 'fail',
+            'message' => 'email not found',
+        ], 400);
     }
     /**
      * @param int $id
@@ -58,18 +64,24 @@ class EmailController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $em = $this->getDoctrine()->getManager();
-        $email = $repository->find((int)$id);
-        /**
-         * @var Email $email
-         */
-        $email->setReadAt(new \DateTime());
-        $em->persist($email);
-        $em->flush();
+        if($email = $repository->find((int)$id)) {
+            /**
+             * @var Email $email
+             */
+            $email->setReadAt(new \DateTime());
+            $em->persist($email);
+            $em->flush();
+
+            return new JsonResponse([
+                'status' => 'ok',
+                'message' => 'email marked as read',
+            ], 200);
+        }
 
         return new JsonResponse([
-            'status' => 'ok',
-            'message' => 'email marked as read',
-        ], 200);
+            'status' => 'fail',
+            'message' => 'email not found',
+        ], 400);
     }
 
     /**
