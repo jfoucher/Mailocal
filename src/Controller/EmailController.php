@@ -79,6 +79,10 @@ class EmailController extends AbstractController
      */
     public function newEmails($last)
     {
+        // Make sure $last is an int
+        $last = preg_replace('/\D/', '', $last);
+        $last = (int) ($last ?? 0);
+
         /**
          * @var EmailRepository $repository
          */
