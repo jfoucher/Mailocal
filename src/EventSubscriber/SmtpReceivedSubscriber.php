@@ -81,11 +81,7 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
             }, $message->getAttachments());
         }
         $email->setAttachments($attachments);
-        try {
-            $email->setSubject(iconv_mime_decode($message->getSubject()));
-        } catch (\Exception $e) {
-            $email->setSubject($message->getSubject());
-        }
+        $email->setSubject(mb_decode_mimeheader($message->getSubject()));
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());
         $to = $message->getTo()->map(function ($item) {
