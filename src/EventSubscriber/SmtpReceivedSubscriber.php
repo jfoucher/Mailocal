@@ -81,11 +81,10 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
             }, $message->getAttachments());
         }
         $email->setAttachments($attachments);
+        $subject = mb_decode_mimeheader($message->getSubject());
         // Fix for https://bugs.php.net/bug.php?id=68821
-        $subject = preg_replace_callback('/(=\?[^\?]+\?Q\?)([^\?]+)(\?=)/i', function($matches) {
-            return $matches[1] . str_replace('_', '=20', $matches[2]) . $matches[3];
-        }, $message->getSubject());
-        $email->setSubject(mb_decode_mimeheader($subject));
+        $subject = str_replace('_', ' ', $subject);
+        $email->setSubject($subject);
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());
         $to = $message->getTo()->map(function ($item) {
