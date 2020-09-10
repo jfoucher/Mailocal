@@ -85,10 +85,14 @@ class HomeController extends AbstractController
          */
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $criteria = [];
+        if(!$filter) {
+            $filter = $_GET['s'] ?? null;
+        }
         if ($filter) {
             $criteria['to = ?'] = $filter;
             $criteria['subject = ?'] = $filter;
-            $criteria['message = ?'] = $filter;
+            $criteria['text = ?'] = $filter;
+            $criteria['html = ?'] = $filter;
         }
 
         $emails = $repository->allOrderedDateDesc($criteria, 'or');
