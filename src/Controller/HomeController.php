@@ -91,7 +91,7 @@ class HomeController extends AbstractController
             $criteria['message = ?'] = $filter;
         }
 
-        $emails = $repository->allOrderedDateDesc($criteria);
+        $emails = $repository->allOrderedDateDesc($criteria, 'or');
 
         return $this->render('home/index.html.twig', [
             'emails' => $emails,
