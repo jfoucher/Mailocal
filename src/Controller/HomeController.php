@@ -74,21 +74,22 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/{email}", name="home")
-     * @param null|mixed $email
+     * @Route("/{filter}", name="home")
+     * @param null|mixed $filter
      * @return Response
      */
-    public function index($email = null)
+    public function index($filter = null)
     {
         /**
          * @var EmailRepository $repository
          */
         $repository = $this->getDoctrine()->getRepository(Email::class);
         $criteria = [];
-        if ($email) {
-            $criteria['to = ?'] = $email;
+        if ($filter) {
+            $criteria['to = ?'] = $filter;
+            $criteria['subject = ?'] = $filter;
+            $criteria['message = ?'] = $filter;
         }
-        //$s = $request->query->get('s');
 
         $emails = $repository->allOrderedDateDesc($criteria);
 

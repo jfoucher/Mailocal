@@ -33,7 +33,7 @@ class EmailRepository extends ServiceEntityRepository
         parent::__construct($registry, Email::class);
     }
 
-    public function allOrderedDateDesc($criteria = [])
+    public function allOrderedDateDesc($criteria = [], $method = 'and')
     {
         $qb = $this->createQueryBuilder('e');
         $i = 1;
@@ -42,7 +42,11 @@ class EmailRepository extends ServiceEntityRepository
                 //Make sure start with table name
                 $k = 'e.'.$k;
             }
-            $qb->andWhere($k.$i);
+            if($method === 'or') {
+                $qb->orWhere($k.$i);
+            } else {
+                $qb->andWhere($k.$i);
+            }
             $qb->setParameter($i, $v);
             $i++;
         }
