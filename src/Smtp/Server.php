@@ -16,6 +16,7 @@
 
 namespace App\Smtp;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use React\Socket\ConnectionInterface;
 use Evenement\EventEmitterTrait;
 use Evenement\EventEmitterInterface;
@@ -66,6 +67,11 @@ class Server implements EventEmitterInterface
     protected $sessionClass;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected EventDispatcherInterface $dispatcher;
+
+    /**
      * Constructor, no required parameters if binding to the localhost interface.
      *
      * @param string $host
@@ -77,12 +83,20 @@ class Server implements EventEmitterInterface
      * @param \React\EventLoop\LoopInterface $loop
      *   Loop service.
      */
-    public function __construct(string $host, int $port, LoggerInterface $log, LoopInterface $loop, string $sessionClass)
+    public function __construct(
+        string $host,
+        int $port,
+        LoggerInterface $log,
+        LoopInterface $loop,
+        string $sessionClass,
+        EventDispatcherInterface $dispatcher
+    )
     {
         $this->log = $log;
         $this->host = $host ?? '127.0.0.1';
         $this->port = $port ?? 25;
         $this->loop = $loop;
+        $this->dispatcher = $dispatcher;
         $this->sessionClass = $sessionClass;
         // Issue a warning if the loop service is ReactPHP's default...
         if (is_a($loop, \React\EventLoop\StreamSelectLoop::class)) {
@@ -127,15 +141,16 @@ class Server implements EventEmitterInterface
         $this->log->info("Incoming connection received from: {$conn->getRemoteAddress()}");
         $session_class = $this->getSessionClass();
         /* @var \App\Smtp\SessionInterface $session */
-        $session = new $session_class($conn, SmtpSettings::instance(), $this->log, $this->loop);
-        $instance = $this;
-        // Bubble up from the session to the server.
-        $session->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($instance) {
-            $instance->emit(SessionInterface::EVENT_SMTP_RECEIVED, [$message]);
-        });
-        $session->on(CustomSession::EVENT_SMTP_AUTH_FAILED, function (Message $message, $username, $password) use ($instance) {
-            $instance->emit(CustomSession::EVENT_SMTP_AUTH_FAILED, [$message, $username, $password]);
-        });
+        dump(get_class($this->dispatcher));
+        $session = new $session_class($conn, SmtpSettings::instance(), $this->log, $this->loop, $this->dispatcher);
+//        $instance = $this;
+//        // Bubble up from the session to the server.
+//        $session->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($instance) {
+//            $instance->dispatcher->dispatch(SessionInterface::EVENT_SMTP_RECEIVED, [$message]);
+//        });
+//        $session->on(CustomSession::EVENT_SMTP_AUTH_FAILED, function (Message $message, $username, $password) use ($instance) {
+//            $instance->dispatcher->dispatch(CustomSession::EVENT_SMTP_AUTH_FAILED, [$message, $username, $password]);
+//        });
         $session->run();
     }
 }

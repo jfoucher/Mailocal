@@ -13,7 +13,7 @@
     </td>
     <td class="mailbox-name">
         {{ email.to }}
-        <span class="mailbox-date" title="{{ email.createdAt|date('Y-m-d H:i:s')}}">{{ email.createdAt|time_diff }}</span>
+        <span class="mailbox-date" title="{{ email.createdAt|date('Y-m-d H:i:s')}}">{{ email.createdAt|date }}</span>
     </td>
     <td class="mailbox-subject">
         <b>{{ email.subject }}</b><span class="mailbox-firstline">{{ email.firstLine }}</span>

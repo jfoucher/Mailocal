@@ -16,8 +16,10 @@
 
 namespace App\Smtp;
 
-use React\EventLoop\LoopInterface;
+use App\Event\AuthFailedEvent;
+use App\Event\MessageReceivedEvent;
 use Psr\Log\LoggerInterface;
+use React\EventLoop\LoopInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -34,7 +36,7 @@ class ServerSymfony extends Server
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-    protected $dispatcher;
+    protected EventDispatcherInterface $dispatcher;
 
     /**
      * Constructor, no required parameters if binding to the localhost interface.
@@ -50,7 +52,7 @@ class ServerSymfony extends Server
      */
     public function __construct(string $host, int $port, LoggerInterface $log, LoopInterface $loop, string $sessionClass, EventDispatcherInterface $dispatcher)
     {
-        parent::__construct($host, $port, $log, $loop, $sessionClass);
+        parent::__construct($host, $port, $log, $loop, $sessionClass, $dispatcher);
         $this->dispatcher = $dispatcher;
         $this->on(SessionInterface::EVENT_SMTP_RECEIVED, [$this, 'onMessageReceived']);
         $this->on(CustomSession::EVENT_SMTP_AUTH_FAILED, [$this, 'onAuthFailed']);

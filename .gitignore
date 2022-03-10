@@ -18,3 +18,8 @@
 ###< symfony/web-server-bundle ###
 node_modules/
 .idea/
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

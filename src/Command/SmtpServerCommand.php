@@ -17,22 +17,14 @@
 namespace App\Command;
 
 use App\Email\InvalidAttachmentException;
-use App\Entity\Email;
-use App\EventSubscriber\SmtpReceivedSubscriber;
+use App\Email\Parser;
+use App\Smtp\CustomServer;
 use App\Smtp\Message;
-use App\Smtp\MessageReceivedEvent;
 use App\Smtp\SessionInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Email\Parser;
-use App\Smtp\CustomServer;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class SmtpServerCommand extends Command
@@ -46,7 +38,7 @@ class SmtpServerCommand extends Command
         $this->server = $server;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('SMTP server.')
@@ -56,7 +48,7 @@ class SmtpServerCommand extends Command
             'p',
             InputOption::VALUE_OPTIONAL,
             'Which port should the SMTP server run on?',
-            getenv('SMTP_SERVER_PORT')
+           2525
         )
 
         ->addOption(
@@ -64,11 +56,11 @@ class SmtpServerCommand extends Command
             'ah',
             InputOption::VALUE_OPTIONAL,
             'Which ip addresses should be allowed to connect to this server?',
-            getenv('SMTP_SERVER_ALLOWED_HOSTS')
+            "127.0.0.1"
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->server->setPort($input->getOption('port'));
         $this->server->setAllowedHosts($input->getOption('allowed_hosts'));
@@ -78,6 +70,7 @@ class SmtpServerCommand extends Command
         $io->success('SMTP server now listening for messages from '.$this->server->getAllowedHosts().' on port '.$this->server->getPort());
 
         $this->server->getServer()->on(SessionInterface::EVENT_SMTP_RECEIVED, function (Message $message) use ($output) {
+            dump('received in command');
             $parser = new Parser();
             try {
                 $msg = $parser->parse($message->data);

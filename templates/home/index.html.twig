@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'index_title'|trans() }}{% endblock %}
+{% block title %}{{ 'index_title'|trans }}{% endblock %}
 
-{% block page_title %}{{ 'index_page_title'|trans() }}{% endblock %}
-{% block page_subtitle %}{{ 'index_page_subtitle'|trans() }}{% endblock %}
+{% block page_title %}{{ 'index_page_title'|trans }}{% endblock %}
+{% block page_subtitle %}{{ 'index_page_subtitle'|trans }}{% endblock %}
 {% block page_content %}
 
     <div class="row" style="display:flex; height: 100%">
@@ -17,7 +17,7 @@
                     <div class="box-tools pull-right">
                         <div class="has-feedback">
                             <form method="get" action="{{ path('home') }}">
-                            <input type="text" class="form-control input-sm" placeholder="Search Mail" name="s">
+                                <input type="text" class="form-control input-sm" placeholder="Search Mail" name="s">
                             </form>
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
@@ -48,9 +48,9 @@
                     <!-- /.mail-box-messages -->
                 </div>
                 <!-- /.box-body -->
-                {#<div class="box-footer no-padding">#}
-                    {#{% include 'partials/mailbox-controls.html.twig' %}#}
-                {#</div>#}
+                <div class="box-footer no-padding">
+                    {% include 'partials/mailbox-controls.html.twig' %}
+                </div>
             </div>
             <!-- /. box -->
         </div>

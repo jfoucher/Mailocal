@@ -16,25 +16,15 @@
 
 namespace App\Command;
 
-use App\Email\InvalidAttachmentException;
-use App\Entity\Email;
-use App\EventSubscriber\SmtpReceivedSubscriber;
+use App\Event\MessageReceivedEvent;
 use App\Smtp\CustomSession;
 use App\Smtp\Message;
-use App\Smtp\MessageReceivedEvent;
-use App\Smtp\SessionInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use App\Email\Parser;
-use App\Smtp\CustomServer;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Process\Process;
 
 class PostfixReceiveCommand extends Command
 {

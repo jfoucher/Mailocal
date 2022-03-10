@@ -16,16 +16,17 @@
 
 namespace App\Smtp;
 
-use Evenement\EventEmitterInterface;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use React\Socket\ConnectionInterface;
 use React\EventLoop\LoopInterface;
 
+
 /**
  * SMTP session interface.
  */
-interface SessionInterface extends EventEmitterInterface
+interface SessionInterface
 {
     const EVENT_SMTP_RECEIVED = 'smtp.received';
 
@@ -50,6 +51,8 @@ interface SessionInterface extends EventEmitterInterface
      *   Log service.
      * @param LoopInterface $loop
      *   Loop service.
+     *  @param EventDispatcherInterface $dispatcher
+     *   Event dispatcher.
      */
-    public function __construct(ConnectionInterface $socket, SmtpSettings $settings, LoggerInterface $log, LoopInterface $loop);
+    public function __construct(ConnectionInterface $socket, SmtpSettings $settings, LoggerInterface $log, LoopInterface $loop, EventDispatcherInterface $dispatcher);
 }

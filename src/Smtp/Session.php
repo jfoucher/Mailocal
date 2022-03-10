@@ -16,8 +16,10 @@
 
 namespace App\Smtp;
 
-use Psr\Log\LoggerInterface;
+use App\Event\MessageReceivedEvent;
 use Evenement\EventEmitterTrait;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 use React\Socket\ConnectionInterface;
 use React\EventLoop\LoopInterface;
 
@@ -31,7 +33,6 @@ use React\EventLoop\LoopInterface;
 abstract class Session implements SessionInterface
 {
     use EventEmitterTrait;
-
     /**
      * Data message end of file.
      */
@@ -50,6 +51,13 @@ abstract class Session implements SessionInterface
      * @var \Psr\Log\LoggerInterface
      */
     protected $log;
+
+    /**
+     * Event Dispatchere.
+     *
+     * @var EventDispatcherInterface
+     */
+    protected $dispatcher;
 
     /**
      * React connection.
@@ -117,11 +125,18 @@ abstract class Session implements SessionInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct(ConnectionInterface $socket, SmtpSettings $settings, LoggerInterface $log, LoopInterface $loop)
+    public function __construct(
+        ConnectionInterface $socket,
+        SmtpSettings $settings,
+        LoggerInterface $log,
+        LoopInterface $loop,
+        EventDispatcherInterface $dispatcher
+    )
     {
         $this->log = $log;
         $this->socket = $socket;
         $this->settings = $settings;
+        $this->dispatcher = $dispatcher;
         $this->initialize();
         $this->loop = $loop;
         $this->resetTimer(15);
@@ -584,7 +599,8 @@ abstract class Session implements SessionInterface
         } else {
             $this->socketWriteLine('554 ' . $result);
         }
-        $this->emit(SessionInterface::EVENT_SMTP_RECEIVED, [$this->message]);
+        dump('dispatch ' . get_class($this->dispatcher));
+        $this->dispatcher->dispatch(new MessageReceivedEvent($this->message));
     }
 
     /**

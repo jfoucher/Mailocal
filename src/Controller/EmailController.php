@@ -1,32 +1,26 @@
 <?php
 
-/*
- * This file is part of the Maillocal package.
- *
- * Copyright 2019 Jonathan Foucher
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * @package Mailocal
- */
-
 namespace App\Controller;
 
 use App\Entity\Email;
 use App\Repository\EmailRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class EmailController extends AbstractController
 {
+    protected EmailRepository $emailRepository;
+    protected EntityManagerInterface $manager;
+
+    public function __construct(EmailRepository $emailRepository, EntityManagerInterface $manager)
+    {
+        $this->emailRepository = $emailRepository;
+        $this->manager = $manager;
+    }
+
     /**
      * @param int $id
      * @Route("/emails/{id}", name="deleteEmail", methods={"DELETE"})
@@ -34,15 +28,13 @@ class EmailController extends AbstractController
      */
     public function delete($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Email::class);
-        $em = $this->getDoctrine()->getManager();
-        $email = $repository->find((int)$id);
+        $email = $this->emailRepository->find((int)$id);
         /**
          * @var Email $email
          */
         $email->setDeletedAt(new \DateTime());
-        $em->persist($email);
-        $em->flush();
+        $this->manager->persist($email);
+        $this->manager->flush();
 
         return new JsonResponse([
             'status' => 'ok',
@@ -56,15 +48,13 @@ class EmailController extends AbstractController
      */
     public function markRead($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Email::class);
-        $em = $this->getDoctrine()->getManager();
-        $email = $repository->find((int)$id);
+        $email = $this->emailRepository->find((int)$id);
         /**
          * @var Email $email
          */
         $email->setReadAt(new \DateTime());
-        $em->persist($email);
-        $em->flush();
+        $this->manager->persist($email);
+        $this->manager->flush();
 
         return new JsonResponse([
             'status' => 'ok',
@@ -77,19 +67,15 @@ class EmailController extends AbstractController
      * @Route("/emails/new/{last}", name="newEmails", methods={"GET"})
      * @return Response
      */
-    public function newEmails($last)
+    public function newEmails($last): Response
     {
-        /**
-         * @var EmailRepository $repository
-         */
-        $repository = $this->getDoctrine()->getRepository(Email::class);
         $criteria = [
             'id > ?' => $last
         ];
 
         $emails = array_map(function ($email) {
             return $this->renderView('partials/email-row.html.twig', ['email' => $email]);
-        }, $repository->allOrderedDateDesc($criteria));
+        }, $this->emailRepository->allOrderedDateDesc($criteria));
 
         return new Response(join('', $emails));
     }

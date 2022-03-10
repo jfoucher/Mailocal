@@ -17,13 +17,11 @@ if (is_file(__DIR__.'/../vendor/autoload.php')) {
 $dotEnvFilename = \dirname(__DIR__) . '/.env';
 $envVars = (new Dotenv())->parse(\file_get_contents($dotEnvFilename), $dotEnvFilename);
 
-$webServerAddressPort = $envVars['WEB_SERVER_ADDRESSPORT'] ?? null;
+$webServerAddressPort = $envVars['WEB_SERVER_ADDRESSPORT'] ? $envVars['WEB_SERVER_ADDRESSPORT'] : "localhost:8000";
+//php -S localhost:8000
+//dd($webServerAddressPort);
+$runWebServerCmdParts = ['php', '-S', $webServerAddressPort , '-t', './public'];
 
-$runWebServerCmdParts = ['php', __DIR__.'/console', 'server:run'];
-
-if (\strlen($webServerAddressPort)) {
-    $runWebServerCmdParts[] = $webServerAddressPort;
-}
 
 $web = new Process($runWebServerCmdParts, null, null, null, 0);
 $web->setTty(Process::isTtySupported());
@@ -35,7 +33,15 @@ $web->start(function ($type, $buffer) {
     }
 });
 
-$mail = new Process(['php', __DIR__.'/console', 'email:server'], null, null, null, 0);
+$mail = new Process([
+    'php',
+    __DIR__.'/console',
+    'email:server',
+    '--port',
+    $envVars['SMTP_SERVER_PORT'],
+    '--allowed_hosts',
+    $envVars['SMTP_SERVER_ALLOWED_HOSTS'],
+    ], null, null, null, 0);
 $mail->setTty(Process::isTtySupported());
 $mail->start(function ($type, $buffer) {
     if (Process::ERR === $type) {

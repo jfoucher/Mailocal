@@ -19,9 +19,9 @@ namespace App\EventSubscriber;
 use App\Email\InvalidAttachmentException;
 use App\Email\Parser;
 use App\Entity\Email;
-use App\Smtp\AuthFailedEvent;
+use App\Event\AuthFailedEvent;
+use App\Event\MessageReceivedEvent;
 use App\Smtp\CustomSession;
-use App\Smtp\MessageReceivedEvent;
 use App\Smtp\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use MS\Email\Parser\Attachment;
@@ -39,15 +39,11 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
         $this->em = $em;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
-            CustomSession::EVENT_SMTP_RECEIVED => [
-                ['processSmtpConnection', 10],
-            ],
-            CustomSession::EVENT_SMTP_AUTH_FAILED => [
-                ['processAuthFailed', 10],
-            ],
+            MessageReceivedEvent::class => 'processSmtpConnection',
+            AuthFailedEvent::class => 'processAuthFailed',
         ];
     }
 
@@ -81,7 +77,7 @@ class SmtpReceivedSubscriber implements EventSubscriberInterface
             }, $message->getAttachments());
         }
         $email->setAttachments($attachments);
-        $email->setSubject(iconv_mime_decode($message->getSubject()));
+        $email->setSubject(iconv_mime_decode($message->getSubject(), 2));
         $email->setFrom($message->getFrom()->getAddress());
         $email->setFromName($message->getFrom()->getName());
         $to = $message->getTo()->map(function ($item) {

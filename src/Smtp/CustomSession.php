@@ -16,6 +16,8 @@
 
 namespace App\Smtp;
 
+use App\Event\AuthFailedEvent;
+
 class CustomSession extends Session
 {
     const EVENT_SMTP_AUTH_FAILED = 'smtp.auth_failed';
@@ -52,7 +54,7 @@ class CustomSession extends Session
         if ($user) {
             $res = ($user === $username && $pwd === $password);
             if ($res === false) {
-                $this->emit(self::EVENT_SMTP_AUTH_FAILED, [$this->message, $username, $password]);
+                $this->dispatcher->dispatch(new AuthFailedEvent($this->message, $username, $password));
                 $this->log->info('Authentication error');
             }
 
