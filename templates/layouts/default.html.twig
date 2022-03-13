@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock %}
-    <title>{% block title %}{{ block('page_title') }}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -38,16 +38,18 @@
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Recipients
+                                {{ 'recipients' | trans }}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             {% for recipient in recipients %}
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
+                                <a href="{{path('home', {email: recipient.to})}}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ recipient.to }}</p>
+                                    <p>
+                                        {{ recipient.to }}
+                                    </p>
                                 </a>
                             </li>
                             {% endfor %}

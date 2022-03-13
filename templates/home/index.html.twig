@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/default.html.twig' %}
 
-{% block title %}{{ 'index_title'|trans }}{% endblock %}
+{#{% block title %}{{ 'index_title'|trans }}{% endblock %}#}
 
-{% block page_title %}{{ 'index_page_title'|trans }}{% endblock %}
-{% block page_subtitle %}{{ 'index_page_subtitle'|trans }}{% endblock %}
+{#{% block page_title %}{{ 'index_page_title'|trans }}{% endblock %}#}
+{#{% block page_subtitle %}{{ 'index_page_subtitle'|trans }}{% endblock %}#}
 {% block page_content %}
 
     <div class="row" style="display:flex; height: 100%">
@@ -55,50 +55,91 @@
             <!-- /. box -->
         </div>
         <div class="email-display" style="display:none;flex-direction: column">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
-                    <div class="box-tools pull-right">
-                        <a href="#" class="email-close"><i class="fa fa-close"></i></a>
-                    </div>
+            <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+{#                    <h3 class="box-title"></h3>#}
+{#                    <div class="box-tools float-right">#}
+{#                        <a href="#" class="email-close"><i class="fa fa-close"></i></a>#}
+{#                    </div>#}
+                    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                        <li class="nav-item ">
+                            <a  class="nav-link active" href="#html-content" data-toggle="tab" aria-expanded="false">HTML</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#text-content" data-toggle="tab" aria-expanded="true">{{ 'Text'|trans() }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#raw-content" data-toggle="tab" aria-expanded="true">{{ 'Raw'|trans() }}</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="box-body no-padding">
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#html-content" data-toggle="tab" aria-expanded="false">HTML</a>
-                            </li>
-                            <li>
-                                <a href="#text-content" data-toggle="tab" aria-expanded="true">{{ 'Text'|trans() }}</a>
-                            </li>
-                            <li>
-                                <a href="#raw-content" data-toggle="tab" aria-expanded="true">{{ 'Raw'|trans() }}</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="html-content">
-                                <iframe width="100%" height="100%" frameborder="0" style="min-height:500px;display:block;flex:1;border: 1px solid #eee;" id="email-display-iframe" src=""></iframe>
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="text-content">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="html-content">
+                            <iframe width="100%" height="100%" frameborder="0" style="min-height:500px;display:block;flex:1;border: 1px solid #eee;" id="email-display-iframe" src="">
 
-                            </div>
-
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="raw-content">
-
-                            </div>
-
-                            <!-- /.tab-pane -->
+                            </iframe>
                         </div>
-                        <!-- /.tab-content -->
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane fade" id="text-content">
+
+                        </div>
+
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane fade" id="raw-content">
+
+                        </div>
                     </div>
-
                 </div>
-                <div class="box-footer" style="display:none;">
 
-                </div>
             </div>
+
+
+
+{#            <div class="box box-primary">#}
+{#                <div class="box-header with-border">#}
+{#                    <h3 class="box-title"></h3>#}
+{#                    <div class="box-tools pull-right">#}
+{#                        <a href="#" class="email-close"><i class="fa fa-close"></i></a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="box-body no-padding">#}
+{#                    <div class="nav-tabs-custom">#}
+{#                        <ul class="nav nav-tabs">#}
+{#                            <li class="active">#}
+{#                                <a href="#html-content" data-toggle="tab" aria-expanded="false">HTML</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#text-content" data-toggle="tab" aria-expanded="true">{{ 'Text'|trans() }}</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#raw-content" data-toggle="tab" aria-expanded="true">{{ 'Raw'|trans() }}</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                        <div class="tab-content">#}
+{#                            <div class="tab-pane active" id="html-content">#}
+{#                                <iframe width="100%" height="100%" frameborder="0" style="min-height:500px;display:block;flex:1;border: 1px solid #eee;" id="email-display-iframe" src=""></iframe>#}
+{#                            </div>#}
+{#                            <!-- /.tab-pane -->#}
+{#                            <div class="tab-pane" id="text-content">#}
+
+{#                            </div>#}
+
+{#                            <!-- /.tab-pane -->#}
+{#                            <div class="tab-pane" id="raw-content">#}
+
+{#                            </div>#}
+
+{#                            <!-- /.tab-pane -->#}
+{#                        </div>#}
+{#                        <!-- /.tab-content -->#}
+{#                    </div>#}
+
+{#                </div>#}
+{#                <div class="box-footer" style="display:none;">#}
+
+{#                </div>#}
+{#            </div>#}
         </div>
         <!-- /.col -->
     </div>

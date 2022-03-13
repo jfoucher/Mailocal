@@ -1,7 +1,5 @@
 {
     "devDependencies": {
-        "@hotwired/stimulus": "^3.0.0",
-        "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
         "admin-lte": "^3.2.0",
         "core-js": "^3.0.0",
@@ -19,6 +17,9 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.0.0"
+        "@fortawesome/fontawesome-free": "^6.0.0",
+        "icheck": "^1.0.2",
+        "jquery": "^3.6.0",
+        "bootstrap": "^4.6.1"
     }
 }

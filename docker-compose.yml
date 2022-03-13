@@ -1,21 +1,40 @@
-version: '3'
+version: "3.4"
 
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+  php:
+    build:
+      context: .
+      target: symfony_php
+    restart: unless-stopped
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - php_socket:/var/run/php
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    environment:
+      # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
+      DATABASE_URL: sqlite:///%kernel.project_dir%/var/data.db
+
+  nginx:
+    build:
+      context: .
+      target: symfony_nginx
+    depends_on:
+      - php
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}
+    restart: unless-stopped
+    volumes:
+      - php_socket:/var/run/php
+    ports:
+      # HTTP
+      - target: 80
+        published: ${HTTP_PORT:-8080}
+        protocol: tcp
+
 
 volumes:
-###> doctrine/doctrine-bundle ###
-  db-data:
-###< doctrine/doctrine-bundle ###
+  php_socket:
+

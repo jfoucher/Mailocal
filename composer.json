@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.11",
         "html2text/html2text": "^4.3",
         "jfoucher/email-parser": "^0.4.1",
+        "knplabs/knp-time-bundle": "^1.18",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.2",
         "react/socket": "^1.11",
@@ -94,7 +95,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*"
+            "require": "5.4.*",
+            "docker": true
         }
     },
     "require-dev": {

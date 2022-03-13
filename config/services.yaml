@@ -4,10 +4,6 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    SMTP_SERVER_USER: '%env(SMTP_SERVER_USER)%'
-    SMTP_SERVER_PASSWORD: '%env(SMTP_SERVER_PASSWORD)%'
-    SMTP_SERVER_PORT: '%env(SMTP_SERVER_PORT)%'
-    WEB_SERVER_ADDRESSPORT: '%env(WEB_SERVER_ADDRESSPORT)%'
 
 services:
     # default configuration for services in *this* file
