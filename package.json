@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@fortawesome/fontawesome-free": "~5.1.1",
-    "@symfony/webpack-encore": "^0.28",
+    "@symfony/webpack-encore": "^4.2",
     "admin-lte": "~2.4.8",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-select": "^1.13.1",
@@ -12,7 +12,7 @@
     "jquery-ui": "^1.12.1",
     "js-cookie": "^2.2.0",
     "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.2",
+    "sass-loader": "^13.2.0",
     "webpack-notifier": "^1.5.1"
   },
   "license": "MIT",
